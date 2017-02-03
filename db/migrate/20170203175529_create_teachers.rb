@@ -5,7 +5,7 @@ class CreateTeachers < ActiveRecord::Migration[5.0]
       t.string :name, limit: 50
       t.string :email, limit: 50
       t.string :password, limit: 255
-      t.bool :admin
+      t.boolean :admin
 
       t.timestamps
     end
