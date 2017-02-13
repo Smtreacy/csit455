@@ -1,5 +1,8 @@
 <div class="login_form">
-<form class="login" action="index.html.erb" method="post">
+  <!--<% if session.exists? && !session[:login] %>
+      <h4 class="log-error">Invalid Email or Passowrd, please try again</h4>
+  <% end %>-->
+<form class="login" action="/" method="post">
   <label>Log In</label> <br>
   <input type="text" name="email" placeholder="Email">
   <input type="password" name="password" placeholder="Password"><br>
