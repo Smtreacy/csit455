@@ -1,9 +1,13 @@
 # Dashboard - The "launching point" for the app
 # provides access point for other models/controllers
 class DashboardController < ApplicationController
+  # allow for custom login without ruby helpers
   protect_from_forgery except: [:login]
+
   # Controller to render the dashboard view
   def index
+    # return all courses associated with the current user
+    @courses = @user.courses.all
   end
 
   # authentication view for the app
@@ -21,10 +25,10 @@ class DashboardController < ApplicationController
   # else redirect to authenticate with error
   def login
     # find a user in the database with the same email as entered
-    user = Teacher.find_by_email(params[:email])
+    @user = Teacher.find_by_email(params[:email])
 
     # if a user is found, and the password is correct, login
-    if user && user.password == params[:password]
+    if @user && @user.password == params[:password]
       # add user information to session
       session[:login] = true
       session[:email] = user.email
@@ -34,5 +38,10 @@ class DashboardController < ApplicationController
       session[:login] = false
       redirect_to '/authenticate'
     end
+  end
+
+  # view for sign up page
+  def signup
+
   end
 end

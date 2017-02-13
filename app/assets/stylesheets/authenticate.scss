@@ -1,5 +1,26 @@
-html, body {
+
+//not needed because of reset in application.css
+/*html, body {
   margin: 0;
+}*/
+@import "mixins";
+
+#auth-containter {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background: image_url("books.jpg") center no-repeat;
+
+  //black overlay for image background
+  .overlay {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
 }
 
 .login_form {
@@ -9,10 +30,12 @@ html, body {
   left: 35%;
   right: 35%;
   border: 1px solid black;
-  height: 210px;
+  height: 220px;
   top: 25%;
   padding: 5px;
   border-radius: 5%;
+
+  background-color: white;
 }
 
 .login {

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'dashboard#authenticate'
 
   get '/authenticate', to: 'dashboard#authenticate'
+  get '/index', to: 'dashboard#index'
 
   # set form submit to login controller
   post '/', to: 'dashboard#login'

@@ -1,0 +1,25 @@
+/* MIXINS
+ * easier syntax than full css
+ * use: @include mixin_name(values);
+ */
+
+/*
+ * BORDER-RADIUS
+ * use: @include border-radius(radius);
+ */
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+/*
+ * BOX SHADOW MIXIN
+ * use: @include box-shadow(offset(optional), hoff, voff, blurr, color);
+ */
+@mixin box-shadow($args...) {
+  -webkit-box-shadow: $args;
+  -moz-box-shadow: $args;
+  box-shadow: $args;
+}
