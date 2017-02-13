@@ -1,0 +1,37 @@
+html, body {
+  margin: 0;
+}
+
+.login_form {
+  position: absolute;
+  margin: 0;
+  width: 30%;
+  left: 35%;
+  right: 35%;
+  border: 1px solid black;
+  height: 200px;
+  top: 25%;
+  padding: 5px;
+  border-radius: 5%;
+}
+
+.login {
+  text-align: center;
+}
+
+label {
+  font-size: 2.4em;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 75%;
+  margin-bottom: 10px;
+}
+
+button {
+  position: absolute;
+  left: 40%;
+  right: 40%;
+  width: 20%;
+}
