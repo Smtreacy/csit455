@@ -5,6 +5,7 @@ class DashboardController < ApplicationController
   def index
   end
 
+  # authentication view for the app
   def authenticate
 
   end
