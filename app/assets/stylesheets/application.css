@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+/*STYLE NORMALIZATION*/
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-family: "Open Sans", "Arial", sans-serif;
+}
