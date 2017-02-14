@@ -1,18 +1,55 @@
 <!-- Added container for background
-less ambiguous than making body or html have the background image-->
+     less ambiguous than making body or html have the background image-->
 <div id="auth-containter">
   <div class="overlay">
     <div class="login_form">
       <!--<% if session.exists? && !session[:login] %>
-          <h4 class="log-error">Invalid Email or Passowrd, please try again</h4>
+          <h4 class="log-error">Invalid Email or Password, please try again</h4>
       <% end %>-->
     <form class="login" action="/" method="post">
       <label>Log In</label> <br>
       <input type="text" name="email" placeholder="Email">
       <input type="password" name="password" placeholder="Password"><br>
       <button type="submit" name="login">Log In</button>
-      <p class="signup">Don't have an account? <a href="#">Sign Up</a></p>
+      <p class="signup">Don't have an account? <a href="">Sign Up</a></p>
     </form>
     </div>
+
+    <div class="signup-cont"></div> <!-- AJAX Destination-->
   </div>
 </div>
+
+<!--JQUERY-->
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function(){
+      //Hide AJAX destination at first
+      $('.signup-cont').hide();
+
+      //AJAX call for signup form
+      $('p.signup a').on("click", function (a){
+          a.preventDefault(); //prevent page reload on click of <a> tag
+          $.ajax(
+              {
+                  url: '/signup',
+                  cache: false,
+                  success: function (html) {
+                      $('.signup-cont').append(html).show();
+                  }
+              }
+        )
+      })
+  });
+
+  //after ajax call, add a click event listener on the 'X'
+  $(document).ajaxComplete(function () {
+      $('p.exit').on("click", function () {
+          //hide the container to show login form
+          $('.signup-cont').hide().css({"z-index": "-100"});
+          //remove previous event listener on the ajax call, add a new one to just show the container
+          $('p.signup a').off("click").on("click", function (a) {
+              a.preventDefault();  //prevent ajax call from happening again
+              $('.signup-cont').show().css({"z-index": "100"});
+          })
+      })
+  });
+</script>

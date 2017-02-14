@@ -1,9 +1,6 @@
-
-//not needed because of reset in application.css
-/*html, body {
-  margin: 0;
-}*/
-@import "mixins";
+//Import partials used
+@import "partials/mixins";
+@import "partials/signup";
 
 #auth-containter {
   display: block;
@@ -36,39 +33,39 @@
   border-radius: 5%;
 
   background-color: white;
-}
 
-.login {
-  text-align: center;
-  top: 10%;
-}
+  .login {
+    text-align: center;
+    top: 10%;
 
-label {
-  display: block;
-  font-size: 3em;
-  margin-bottom: 5px;
-}
+    label {
+      display: block;
+      font-size: 3em;
+      margin-bottom: 5px;
+    }
 
-input {
-  width: 75%;
-  margin-bottom: 10px;
-  padding: 3px;
-}
+    input {
+      width: 75%;
+      margin-bottom: 10px;
+      padding: 3px;
+    }
 
-button {
-  position: absolute;
-  left: 38%;
-  right: 38%;
-  width: 24%;
-  margin-top: 15px;
-  padding: 5px;
-  border: 1px solid black;
-  border-radius: 2px;
-}
+    button {
+      position: absolute;
+      left: 38%;
+      right: 38%;
+      width: 24%;
+      margin-top: 15px;
+      padding: 5px;
+      border: 1px solid black;
+      border-radius: 2px;
+    }
 
-.signup {
-  position: absolute;
-  bottom: 5px;
-  width: 100%;
-  text-align: center;
+    .signup {
+      position: absolute;
+      bottom: 5px;
+      width: 100%;
+      text-align: center;
+    }
+  }
 }

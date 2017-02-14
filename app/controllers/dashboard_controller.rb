@@ -40,8 +40,9 @@ class DashboardController < ApplicationController
     end
   end
 
-  # view for sign up page
+  # render signup partial in AJAX call
   def signup
-
+    @teacher = Teacher.new
+    render 'signup', :layout => false
   end
 end
