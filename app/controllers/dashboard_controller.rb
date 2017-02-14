@@ -7,7 +7,7 @@ class DashboardController < ApplicationController
   # Controller to render the dashboard view
   def index
     # return all courses associated with the current user
-    @courses = @user.courses.all
+    # @courses = @user.courses.all
   end
 
   # authentication view for the app
@@ -31,8 +31,8 @@ class DashboardController < ApplicationController
     if @user && @user.password == params[:password]
       # add user information to session
       session[:login] = true
-      session[:email] = user.email
-      redirect_to 'index'
+      session[:email] = @user.email
+      redirect_to '/index'
     # else create an error and send back to authenticate view
     else
       session[:login] = false
