@@ -32,7 +32,10 @@ class TeachersController < ApplicationController
       redirect_back(fallback_location: '/')
     end
 
+    # save new teacher object to rails database
     @teacher.save
+    # redirect home
+    ### how can we tell if this was successful?
     redirect_back(fallback_location: '/')
   end
 end
