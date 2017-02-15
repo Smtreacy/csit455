@@ -10,7 +10,7 @@
       <label>Log In</label> <br>
       <input type="text" name="email" placeholder="Email">
       <input type="password" name="password" placeholder="Password"><br>
-      <button type="submit" name="login">Log In</button>
+      <button type="submit">Log In</button>
       <p class="signup">Don't have an account? <a href="">Sign Up</a></p>
     </form>
     </div>
@@ -23,7 +23,7 @@
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function(){
       //Hide AJAX destination at first
-      $('.signup-cont').hide();
+      $('.signup-cont').css({"opacity": "0", "display": "none"});
 
       //AJAX call for signup form
       $('p.signup a').on("click", function (a){
@@ -33,7 +33,7 @@
                   url: '/signup',
                   cache: false,
                   success: function (html) {
-                      $('.signup-cont').append(html).show();
+                      $('.signup-cont').append(html).css({"display": "block"}).animate({"opacity": "1"}, {duration: 350, queue: false});
                   }
               }
         )
@@ -44,7 +44,9 @@
   $(document).ajaxComplete(function () {
       $('p.exit').on("click", function () {
           //hide the container to show login form
-          $('.signup-cont').hide().css({"z-index": "-100"});
+          $('.signup-cont').animate({"opacity": "0"}, {duration: 350, complete: function() {
+              $('.signup-cont').css({"display": "none", "z-index": "-100"});
+          }});
           //remove previous event listener on the ajax call, add a new one to just show the container
           $('p.signup a').off("click").on("click", function (a) {
               a.preventDefault();  //prevent ajax call from happening again

@@ -21,3 +21,9 @@
     font-size: 12px;
     font-family: "Open Sans", "Arial", sans-serif;
 }
+
+/*Remove default styling on 'a' tags*/
+a {
+    text-decoration: none;
+    color: inherit;
+}

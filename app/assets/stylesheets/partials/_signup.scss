@@ -22,7 +22,7 @@
     width: 50vw;
     position: absolute;
     z-index: 100;
-    left: 25vw; top: 21.5vh;
+    left: 25vw; top: 13.5%;
 
     background-color: white;
     @include border-radius(25px);
@@ -40,11 +40,11 @@
     .exit {
       display: block;
       height: auto;
-      width: 2vw;
+      width: 1.2vw;
       position: absolute;
-      right: 0; top: 2vh;
+      right: 2rem; top: 2vh;
 
-
+      text-align: center;
       font-size: 1.2vw;
       cursor: hand;
     }

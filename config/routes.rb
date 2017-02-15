@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   # set home to the authentication page
   root 'dashboard#authenticate'
 
+  get '/', to: 'dashboard#authenticate'
   get '/authenticate', to: 'dashboard#authenticate'
   get '/index', to: 'dashboard#index'
   get '/signup', to: 'dashboard#signup'
   # set form submit to login controller
-  post '/', to: 'dashboard#login'
+  post '/', to: 'dashboard#signin'
   post '/teachers/create', to: 'teachers#create'
 end

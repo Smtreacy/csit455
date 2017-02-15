@@ -14,7 +14,7 @@ class DashboardController < ApplicationController
   def authenticate
     # if login failed, show error message
     if session[:login]
-      redirect_to '/index'
+      # redirect_to '/index'
     else
       @login = false
     end
