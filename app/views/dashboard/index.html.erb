@@ -1,16 +1,35 @@
+<!--General list structure of page, will definitely be modified.-->
 <ul>
 <%= @courses.each do |course|  %>
   <li>
     <h1><%= course.name %></h1>
     <div>
-      <%= if course.books.exists? %>
-            <h3>No book</h3>
-      <%= else
-            course.books.each do |book| %>
-              <h3><%= book.name %></h3>
-          <% end %>
+      <% if course.books.exists %>
+        <%= course.books.each do |book| %>
+          <h3><%= book.name %></h3>
+        <% end %>
+      <% else %>
+          <h3>No book</h3>
       <% end %>
     </div>
   </li>
 <% end %>
 </ul>
+
+<p>Hello Professor </p>
+
+<div style="text-align: left;">
+  <input type="button" value="Order Book">
+</div>
+<div style="text-align: left;">
+  <input type="button" value="Edit Book List">
+</div>
+<div style="text-align: left;">
+  <input type="button" value="Submit List">
+</div>
+<div style="text-align: left;">
+  <input type="button" value="Return to Main Page">
+</div>
+<div style="text-align: left;">
+  <input type="button" value="Logout">
+</div>
