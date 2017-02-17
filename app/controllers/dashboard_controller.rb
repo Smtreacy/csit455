@@ -7,7 +7,8 @@ class DashboardController < ApplicationController
   # Controller to render the dashboard view
   def index
     # return all courses associated with the current user
-    # @courses = @user.courses.all
+    @user = Teacher.find_by_email(session[:email])
+    @courses = @user.courses.all
   end
 
   # authentication view for the app
