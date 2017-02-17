@@ -1,17 +1,16 @@
-<p>Hello Professor </p>
-
-<div style="text-align: left;">
-  <input type="button" value="Order Book">
-</div>
-<div style="text-align: left;">
-  <input type="button" value="Edit Book List">
-</div>
-<div style="text-align: left;">
-  <input type="button" value="Submit List">
-</div>
-<div style="text-align: left;">
-  <input type="button" value="Return to Main Page">
-</div>
-<div style="text-align: bottom left;">
-  <input type="button" value="Logout">
-</div>
+<ul>
+<%= @courses.each do |course|  %>
+  <li>
+    <h1><%= course.name %></h1>
+    <div>
+      <%= if course.books.exists? %>
+            <h3>No book</h3>
+      <%= else
+            course.books.each do |book| %>
+              <h3><%= book.name %></h3>
+          <% end %>
+      <% end %>
+    </div>
+  </li>
+<% end %>
+</ul>

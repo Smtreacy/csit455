@@ -7,8 +7,19 @@ class DashboardController < ApplicationController
   # Controller to render the dashboard view
   def index
     # return all courses associated with the current user
-    @user = Teacher.find_by_email(session[:email])
-    @courses = @user.courses.all
+    @teacher = Teacher.find_by_email(session[:email])
+
+    # if teacher is an admin redirect to admin home
+    if @teacher.admin
+      redirect_to '/adminindex'
+    end
+
+    @courses = @teacher.courses.all
+  end
+
+  # different admin view
+  def adminindex
+
   end
 
   # authentication view for the app
