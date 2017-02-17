@@ -4,7 +4,7 @@
   <li>
     <h1><%= course.name %></h1>
     <div>
-      <% if course.books.exists %>
+      <% if course.books.exists? %>
         <%= course.books.each do |book| %>
           <h3><%= book.name %></h3>
         <% end %>
