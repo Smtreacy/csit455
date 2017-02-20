@@ -50,7 +50,8 @@
           //remove previous event listener on the ajax call, add a new one to just show the container
           $('p.signup a').off("click").on("click", function (a) {
               a.preventDefault();  //prevent ajax call from happening again
-              $('.signup-cont').show().css({"z-index": "100"});
+              $('.signup-cont').css({"z-index": "100", "display": "block"});
+              $('.signup-cont').animate({"opacity": "1"}, {duration: 350});
           })
       })
   });

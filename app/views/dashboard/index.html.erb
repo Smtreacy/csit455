@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Google 'GOogle Icons' or "Font Awesome" use that instead of images -->
 <style>
 
@@ -57,6 +58,34 @@
       <input type="text" name="Edition" placeholder="Edition"><br>
       <button type="submit">Submit</button>
     </form>
+</div>
+<!--General list structure of page, will definitely be modified
+<ul>
+  <% if @courses.empty? %>
+      <h1>No data</h1>
+  <% else %>
+    <%= @courses.each do |course|  %>
+      <li>
+        <h1><%= course.name %></h1>
+        <div>
+          <% if course.books.empty? %>
+              <h1>True</h1>
+            <%= course.books.each do |book| %>
+              <h3><%= book.name %></h3>
+            <% end %>
+          <% else %>
+              <h3>No book</h3>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<!-- Probably don't need, replace with above structure?
+     don't want to steamroll, let me know opinions
+
+<p>Hello Professor </p>
 
 </div>
 
@@ -101,8 +130,4 @@
             }
         }
     }
-</script>
-
-
-
-
+</script>-->

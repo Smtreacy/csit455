@@ -25,7 +25,7 @@ class TeachersController < ApplicationController
     # else redirect back
     if pass1 == params[:confirmPass]
       @teacher = Teacher.new({department: params[:department], name: full_name,
-                              email: params[:email], password: pass1, admin: params[:admin] ? 0 : 1})
+                              email: params[:email], password: pass1, admin: params[:admin] ? 1 : 0})
     else
       # if not correct, redirect back to home
       ### how do we send an error back with it?
