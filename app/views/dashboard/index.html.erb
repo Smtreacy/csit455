@@ -1,17 +1,108 @@
-<p>Hello Professor </p>
+<!-- Google 'GOogle Icons' or "Font Awesome" use that instead of images -->
+<style>
 
-<div style="text-align: left;">
-  <input type="button" value="Order Book">
+
+    button.dropdown {
+      background-color: #eee;
+      color: #444;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: center;
+      outline: none;
+      font-size: 15px;
+      transition: 0.4s;
+    }
+
+    button.dropdown.active, button.dropdown:hover {
+      background-color: #ddd;
+    }
+
+    button.dropdown:after {
+      content: '\002B';
+      color: #777;
+      font-weight: bold;
+      float: right;
+      margin-left: 5px;
+    }
+
+    button.dropdown.active:after {
+      content: "\2212";
+    }
+
+    div.panel {
+      padding: 0 18px;
+      background-color: white;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+    }
+  </style>
+
+
+
+
+
+<h2>Hello Professor</h2>
+<p>Please Select a Class to modify the books required</p>
+<button class="dropdown">Class One</button>
+<div class="panel">
+  <!-- Note this form should pop up in the middle of the screen like the Sign up page im leaving it here for now -->
+    <form class="Book_order" action="/" method="post">
+      <label>Book Form</label> <br>
+      <input type="text" name="BookName" placeholder="BookName">
+      <input type="text" name="ISBN" placeholder="ISBN"><br>
+      <input type="text" name="Author" placeholder="Author"><br>
+      <input type="text" name="Edition" placeholder="Edition"><br>
+      <button type="submit">Submit</button>
+    </form>
+
 </div>
-<div style="text-align: left;">
-  <input type="button" value="Edit Book List">
+
+<button class="dropdown">Class Two</button>
+<div class="panel">
+  <form class="Book_order" action="/" method="post">
+    <label>Book Form</label> <br>
+    <input type="text" name="BookName" placeholder="BookName">
+    <input type="text" name="ISBN" placeholder="ISBN"><br>
+    <input type="text" name="Author" placeholder="Author"><br>
+    <input type="text" name="Edition" placeholder="Edition"><br>
+    <button type="submit">Submit</button>
+  </form>
+
 </div>
-<div style="text-align: left;">
-  <input type="button" value="Submit List">
+
+<button class="dropdown">Class Three</button>
+<div class="panel">
+  <form class="Book_order" action="/" method="post">
+    <label>Book Form</label> <br>
+    <input type="text" name="BookName" placeholder="BookName">
+    <input type="text" name="ISBN" placeholder="ISBN"><br>
+    <input type="text" name="Author" placeholder="Author"><br>
+    <input type="text" name="Edition" placeholder="Edition"><br>
+    <button type="submit">Submit</button>
+  </form>
+
 </div>
-<div style="text-align: left;">
-  <input type="button" value="Return to Main Page">
-</div>
-<div style="text-align: bottom left;">
-  <input type="button" value="Logout">
-</div>
+
+<script>
+    var acc = document.getElementsByClassName("dropdown");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].onclick = function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight){
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
+    }
+</script>
+
+
+
+

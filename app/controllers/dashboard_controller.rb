@@ -46,4 +46,6 @@ class DashboardController < ApplicationController
     @teacher = Teacher.new
     render 'signup', :layout => false
   end
+
+
 end
