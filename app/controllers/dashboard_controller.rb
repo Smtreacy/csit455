@@ -10,9 +10,9 @@ class DashboardController < ApplicationController
     @teacher = Teacher.find_by_email(session[:email])
 
     # if teacher is an admin redirect to admin home
-    if @teacher.admin
-      redirect_to '/adminindex'
-    end
+    # if @teacher.admin
+    #   redirect_to '/adminindex'
+    # end
 
     @courses = @teacher.courses.all
   end
