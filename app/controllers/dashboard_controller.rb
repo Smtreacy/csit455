@@ -19,7 +19,8 @@ class DashboardController < ApplicationController
 
   # different admin view
   def adminindex
-
+    @teacher = Teacher.find_by_email(session[:email])
+    @courses = @teacher.courses.all
   end
 
   # authentication view for the app

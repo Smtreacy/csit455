@@ -1,0 +1,16 @@
+<h1>Welcome, administrator!!</h1>
+
+ <% if !@courses.exists %>
+   <h2>No Courses yet</h2>
+   <a href="#">Add Course</a>
+ <% else  %>
+  <ul>
+    <%= @courses.each do |course|  %>
+    <li>
+      <h2><%= course.name %></h2>
+      <h2><%= professor.name %></h2>
+    </li>
+    <% end %>
+  </ul>
+
+ <% end %>
