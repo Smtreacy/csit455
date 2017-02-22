@@ -20,6 +20,11 @@ class DashboardController < ApplicationController
   # different admin view
   def adminindex
     @teacher = Teacher.find_by_email(session[:email])
+    if @teacher.admin
+
+    else
+      redirect_back(fallback_location: '/index')
+    end
     @courses = @teacher.courses.all
   end
 
@@ -41,7 +46,7 @@ class DashboardController < ApplicationController
     @user = Teacher.find_by_email(params[:email])
 
     # if a user is found, and the password is correct, login
-    if @user && @user.password == params[:password]
+    if @user && @user.authenticate(params[:password])
       # add user information to session
       session[:login] = true
       session[:email] = @user.email
