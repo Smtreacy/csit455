@@ -3,13 +3,13 @@
 <div id="auth-containter">
   <div class="overlay">
     <div class="login_form">
-      <!-- Gives the ability to send back information to the user from controller -->
-      <% flash.each do |message_type, message| %>
-          <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>
-
       <form class="login" action="/" method="post">
         <label>Log In</label> <br>
+        <!-- Gives the ability to send back information to the user from controller -->
+        <% flash.each do |message_type, message| %>
+            <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <% end %>
+
         <input type="text" name="email" placeholder="Email">
         <input type="password" name="password" placeholder="Password"><br>
         <button type="submit">Log In</button>

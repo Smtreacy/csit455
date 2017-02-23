@@ -34,7 +34,7 @@ class DashboardController < ApplicationController
     if session[:login]
       # redirect_to '/index'
     else
-      @login = false
+
     end
   end
 
@@ -54,7 +54,7 @@ class DashboardController < ApplicationController
     # else create an error and send back to authenticate view
     else
       session[:login] = false
-      flash[:fail] = "Incorect "
+      flash[:fail] = "Incorect username or password."
       redirect_to '/authenticate'
     end
   end

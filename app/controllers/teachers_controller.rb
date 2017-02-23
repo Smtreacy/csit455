@@ -13,15 +13,15 @@ class TeachersController < ApplicationController
   # pointed at by form 'create' in signup.html.erb
   def create
     # take first and last name given in the form
-    f_name = params[:fName]
-    l_name = params[:lName]
+    f_name = params[:fName].capitalize
+    l_name = params[:lName].capitalize
     # concatenate them
     full_name = f_name + ' ' + l_name
 
     # if passwords match, create new teacher
     # else redirect back
     if params[:su_password] == params[:confirmPass]
-      @teacher = Teacher.new({department: params[:department], name: full_name,
+      @teacher = Teacher.new({department: params[:department].upcase, name: full_name,
                               email: params[:email], password: params[:su_password],
                               password_confirmation: params[:confirmPass], admin: params[:admin] ? true : false})
     else

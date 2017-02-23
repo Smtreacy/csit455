@@ -26,14 +26,28 @@
     left: 35%;
     right: 35%;
     border: 1px solid black;
-    height: 220px;
+    height: auto;
     top: 25%;
     padding: 5px;
     border-radius: 5%;
 
     background-color: white;
 
+    .alert {
+      display: block;
+      width: 100%;
+      height: auto;
+      font-size: 0.8vw;
+      margin-bottom: 2%;
+    }
+
+    .alert-success { color: green; }
+    .alert-fail { color: lighten(red, 20%); }
+
     .login {
+      display: block;
+      height: auto;
+      width: 100%;
       text-align: center;
       top: 10%;
 
@@ -50,18 +64,19 @@
       }
 
       button {
-        position: absolute;
-        left: 38%;
-        right: 38%;
+        position: relative;
+        //left: 38%;
+        //right: 38%;
         width: 24%;
         margin-top: 15px;
+        margin-bottom: 9px;
         padding: 5px;
         border: 1px solid black;
         border-radius: 2px;
       }
 
       .signup {
-        position: absolute;
+        position: relative;
         bottom: 5px;
         width: 100%;
         text-align: center;
