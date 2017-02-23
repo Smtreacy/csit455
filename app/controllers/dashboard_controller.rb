@@ -54,6 +54,7 @@ class DashboardController < ApplicationController
     # else create an error and send back to authenticate view
     else
       session[:login] = false
+      flash[:fail] = "Incorect "
       redirect_to '/authenticate'
     end
   end

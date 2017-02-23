@@ -35,10 +35,11 @@
                   url: '/signup',
                   cache: false,
                   success: function (html) {
-                      $('.signup-cont').append(html).css({"display": "block"}).animate({"opacity": "1"}, {duration: 350, queue: false});
+                      $('.signup-cont').append(html).css({"display": "block"})
+                          .animate({"opacity": "1"}, {duration: 350, queue: false});
 
                       $("input[name='confirmPass']").on('keyup', function() {
-                          if($("input[name='confirmPass']").val() == $("input[name='password']").val())
+                          if($("input[name='confirmPass']").val() == $("input[name='su_password']").val())
                               $('.match').html('Matching').css({"color": "green"});
                           else
                               $('.match').html('Not Matching').css({"color": "red"});
@@ -62,6 +63,6 @@
               $('.signup-cont').css({"z-index": "100", "display": "block"});
               $('.signup-cont').animate({"opacity": "1"}, {duration: 350});
           })
-      })
+      });
   });
 </script>

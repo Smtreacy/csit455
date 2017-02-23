@@ -20,24 +20,30 @@ class TeachersController < ApplicationController
 
     # if passwords match, create new teacher
     # else redirect back
-    if params[:password] == params[:confirmPass]
+    if params[:su_password] == params[:confirmPass]
       @teacher = Teacher.new({department: params[:department], name: full_name,
-                              email: params[:email], password: params[:password],
-                              password_confirmation: params[:confirmPass], admin: params[:admin] ? 0 : 1})
+                              email: params[:email], password: params[:su_password],
+                              password_confirmation: params[:confirmPass], admin: params[:admin] ? true : false})
     else
       # ADD FLASH MESSAGE
-      flash[:fail] = "The passwords entered do not match!"
+      flash[:fail] = "The passwords entered do not match! #{params[:su_password]} and #{params[:confirmPass]}"
       redirect_back(fallback_location: '/')
+      return
     end
 
     # save new teacher object to rails database
-    if @teacher.save
-      # redirect home
-      ### how can we tell if this was successful?
+    if @teacher.valid? && @teacher.save
+      # redirect home with success message
+      flash[:success] = "Account created successfuly!"
       redirect_back(fallback_location: '/')
     else
-      # if not correct, redirect back to home
-      ### how do we send an error back with it?
+      # if not correct, redirect back to home with error
+      if @teacher.invalid?
+        flash[:fail] = "unable to create teacher object: #{@teacher.errors.full_messages}"
+      else
+        flash[:fail] = "Unable to create account. Please verify information and try again."
+      end
+
       redirect_back(fallback_location: '/')
     end
   end
