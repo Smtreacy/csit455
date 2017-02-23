@@ -50,9 +50,18 @@
     }
 
     form {
+      .note {
+        display: block;
+        height: auto;
+        width: 100%;
+        font-size: 0.8vw;
+        color: lighten(red, 20%);
+        margin-left: 19.5%;
+      }
+
       fieldset {
         display: block;
-        width: 66%;
+        width: 60%;
         height: auto;
         margin: 0 auto;
         margin-top: 16px;
@@ -68,6 +77,10 @@
         &[type="radio"] {
           display: inline-block;
           margin-left: 24px;
+        }
+
+        &.notCorrect {
+          background-color: rgba(255, 0, 0, 0.6);
         }
       }
 

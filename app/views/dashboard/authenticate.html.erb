@@ -3,17 +3,19 @@
 <div id="auth-containter">
   <div class="overlay">
     <div class="login_form">
-      <!--<% if session.exists? && !session[:login] %>
-          <h4 class="log-error">Invalid Email or Password, please try again</h4>
-      <% end %>-->
-    <form class="login" action="/" method="post">
-      <label>Log In</label> <br>
-      <input type="text" name="email" placeholder="Email">
-      <input type="password" name="password" placeholder="Password"><br>
-      <button type="submit">Log In</button>
-      <p class="signup">Don't have an account? <a href="">Sign Up</a></p>
-    </form>
-    </div>
+      <!-- Gives the ability to send back information to the user from controller -->
+      <% flash.each do |message_type, message| %>
+          <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+
+      <form class="login" action="/" method="post">
+        <label>Log In</label> <br>
+        <input type="text" name="email" placeholder="Email">
+        <input type="password" name="password" placeholder="Password"><br>
+        <button type="submit">Log In</button>
+        <p class="signup">Don't have an account? <a href="">Sign Up</a></p>
+      </form>
+      </div>
 
     <div class="signup-cont"></div> <!-- AJAX Destination-->
   </div>
@@ -34,6 +36,13 @@
                   cache: false,
                   success: function (html) {
                       $('.signup-cont').append(html).css({"display": "block"}).animate({"opacity": "1"}, {duration: 350, queue: false});
+
+                      $("input[name='confirmPass']").on('keyup', function() {
+                          if($("input[name='confirmPass']").val() == $("input[name='password']").val())
+                              $('.match').html('Matching').css({"color": "green"});
+                          else
+                              $('.match').html('Not Matching').css({"color": "red"});
+                      });
                   }
               }
         )

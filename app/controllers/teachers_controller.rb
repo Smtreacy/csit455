@@ -25,6 +25,8 @@ class TeachersController < ApplicationController
                               email: params[:email], password: params[:password],
                               password_confirmation: params[:confirmPass], admin: params[:admin] ? 0 : 1})
     else
+      # ADD FLASH MESSAGE
+      flash[:fail] = "The passwords entered do not match!"
       redirect_back(fallback_location: '/')
     end
 
