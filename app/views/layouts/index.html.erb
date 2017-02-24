@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NewBookOrder</title>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <link href="https://fonts.googleapis.com/css?family=Arvo|Open+Sans:300i,400" rel="stylesheet">
+  <script src="https://use.fontawesome.com/3596e8c0a2.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <!-- DEFAULT LAYOUT FOR INDEX PAGES FROM TEACHERS/ADMINS -->
+  <div id="index-cont">
+    <nav id="page-nav">
+      <h1><a href="/index">BookOrder</a></h1>
+      <ul>
+        <li><a href="#"><i class="fa fa-2x fa-user-o"></i></a></li>
+        <li><a href="#"><i class="fa fa-2x fa-power-off"></i></a></li>
+      </ul>
+    </nav>
+    <%= yield %>
+  </div>
+</body>
+</html>

@@ -24,3 +24,13 @@
   box-shadow: $args;
 }
 
+/*
+  USER SELECT MIXIN - prevent user from selecting (highlighting) the object
+  use: @include user-select(value);
+*/
+@mixin user-select($value) {
+  -webkit-user-select: $value;
+  -moz-user-select: $value;
+  -ms-user-select: $value;
+  user-select: $value;
+}

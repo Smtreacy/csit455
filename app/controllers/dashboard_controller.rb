@@ -15,6 +15,7 @@ class DashboardController < ApplicationController
     # end
 
     @courses = @teacher.courses.all
+    render :layout => 'index'
   end
 
   # different admin view
@@ -26,6 +27,7 @@ class DashboardController < ApplicationController
       redirect_back(fallback_location: '/index')
     end
     @courses = @teacher.courses.all
+    render :layout => 'index'
   end
 
   # authentication view for the app
@@ -65,5 +67,5 @@ class DashboardController < ApplicationController
     render 'signup', :layout => false
   end
 
-
+# end dashboard
 end
