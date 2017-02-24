@@ -1,8 +1,10 @@
 class TeachersController < ApplicationController
   protect_from_forgery except: [:create]
+  # always render using the index layout
+  layout  'index'
 
   def show
-    @teachers = Teacher.all
+    @teacher = Teacher.find_by_email(session[:email])
   end
 
   def new
@@ -12,6 +14,7 @@ class TeachersController < ApplicationController
   # create a new teacher in the database
   # pointed at by form 'create' in signup.html.erb
   def create
+    render :layout => false
     # take first and last name given in the form
     f_name = params[:fName].capitalize
     l_name = params[:lName].capitalize
@@ -47,4 +50,6 @@ class TeachersController < ApplicationController
       redirect_back(fallback_location: '/')
     end
   end
+
+
 end

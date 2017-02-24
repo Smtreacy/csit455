@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/index', to: 'dashboard#index'
   get '/signup', to: 'dashboard#signup'
   get '/adminindex', to: 'dashboard#adminindex'
+  get '/profile', to: 'teachers#show'
 
   # set form submit to login controller
   post '/', to: 'dashboard#login'

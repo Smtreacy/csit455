@@ -1,3 +1,26 @@
 // Place all the styles related to the Teachers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/**
+  SHOW.HTML.ERB STYLES
+ */
+.left-nav {
+  display: inline-block;
+  float: left;
+  clear: none;
+  width: 15vw;
+  height: 77.5vh;
+  margin-left: 4vw;
+  background-color: white;
+}
+
+.content {
+  display: inline-block;
+  float: left;
+  clear: none;
+  margin-left: 4.5vw;
+  width: 73vw;
+  height: 77.5vh;
+  background-color: white;
+}
