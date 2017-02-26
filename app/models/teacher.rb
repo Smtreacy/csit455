@@ -1,6 +1,6 @@
 class Teacher < ApplicationRecord
-  has_many :courses
-  # adds encryption and related security
+  has_many :courses, dependent: :destroy
+  # adds encryption and related security \
   # checks to teacher passwords
   has_secure_password
 

@@ -24,8 +24,10 @@ class DashboardController < ApplicationController
     if @teacher.admin
 
     else
-      redirect_back(fallback_location: '/index')
+      flash[:fail] = "There was a problem logging you in!"
+      redirect_back(fallback_location: '/')
     end
+
     @courses = @teacher.courses.all
     render :layout => 'index'
   end
@@ -57,7 +59,7 @@ class DashboardController < ApplicationController
     else
       session[:login] = false
       flash[:fail] = "Incorect username or password."
-      redirect_to '/authenticate'
+      redirect_to '/'
     end
   end
 

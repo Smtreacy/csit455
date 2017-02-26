@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170222022119) do
+ActiveRecord::Schema.define(version: 20170226205658) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -22,13 +22,13 @@ ActiveRecord::Schema.define(version: 20170222022119) do
   end
 
   create_table "books_for_classes", force: :cascade do |t|
-    t.integer  "book_id_id"
-    t.integer  "course_id_id"
+    t.integer  "book_id"
+    t.integer  "course_id"
     t.integer  "quantity"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["book_id_id"], name: "index_books_for_classes_on_book_id_id"
-    t.index ["course_id_id"], name: "index_books_for_classes_on_course_id_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_books_for_classes_on_book_id"
+    t.index ["course_id"], name: "index_books_for_classes_on_course_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(version: 20170222022119) do
     t.integer  "edition"
     t.string   "isbn",       limit: 50
     t.string   "website",    limit: 255
-    t.integer  "book_id_id"
+    t.integer  "book_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-    t.index ["book_id_id"], name: "index_media_on_book_id_id"
+    t.index ["book_id"], name: "index_media_on_book_id"
   end
 
   create_table "teachers", force: :cascade do |t|

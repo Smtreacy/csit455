@@ -2,6 +2,7 @@ class TeachersController < ApplicationController
   protect_from_forgery except: [:create]
   # always render using the index layout
   layout  'index'
+  attr_accessor :first, :last
 
   def show
     @teacher = Teacher.find_by_email(session[:email])
@@ -51,5 +52,20 @@ class TeachersController < ApplicationController
     end
   end
 
+  def edit
+    @teacher = Teacher.find_by_email(session[:email])
+  end
+
+  def update
+
+  end
+
+  def logout
+    # log the user out and
+    # reset all information stored in the session
+    reset_session
+    # redirect to dashboard#authenticate
+    redirect_to '/'
+  end
 
 end

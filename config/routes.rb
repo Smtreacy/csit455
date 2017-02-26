@@ -1,17 +1,20 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  resources :teachers do
+    get 'logout', on: :member
+    resources :courses do
+      resources :books
+    end
+  end
+
   # set home to the authentication page
   root 'dashboard#authenticate'
 
-  get '/', to: 'dashboard#authenticate'
-  get '/authenticate', to: 'dashboard#authenticate'
-  get '/index', to: 'dashboard#index'
-  get '/signup', to: 'dashboard#signup'
-  get '/adminindex', to: 'dashboard#adminindex'
-  get '/profile', to: 'teachers#show'
+  get '/index' => 'dashboard#index'
+  get '/signup' => 'dashboard#signup'
+  get '/adminindex' => 'dashboard#adminindex'
 
   # set form submit to login controller
   post '/', to: 'dashboard#login'
-  post '/teachers/create', to: 'teachers#create'
 end
