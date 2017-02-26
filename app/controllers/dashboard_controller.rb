@@ -1,5 +1,5 @@
 # Dashboard - The "launching point" for the app
-# provides access point for other models/controllers
+# provides middle ground for other models/controllers
 class DashboardController < ApplicationController
   # allow for custom login without ruby helpers
   protect_from_forgery except: [:login]
