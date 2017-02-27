@@ -7,10 +7,16 @@
     <h1>Your Profile:</h1>
     <hr/>
 
-    <%= form_for(@teacher, url: teachers_update_path(@teacher), \
+    <%= form_for(@teacher, url: teacher_path(@teacher), \
                   html: {method: :patch}) do |f| %>
         <%= f.label :name %>
         <%= f.text_field :name %>
+
+        <%=# f.label :first %>
+        <%=# f.text_field :first %>
+
+        <%=# f.label :last %>
+        <%=# f.text_field :last %>
 
         <%= f.label :email %>
         <%= f.email_field :email %>

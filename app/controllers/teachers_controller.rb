@@ -2,7 +2,8 @@ class TeachersController < ApplicationController
   protect_from_forgery except: [:create]
   # always render using the index layout
   layout  'index'
-  attr_accessor :first, :last
+  attr_accessor :first
+  attr_accessor :last
 
   def show
     @teacher = Teacher.find_by_email(session[:email])
@@ -15,7 +16,6 @@ class TeachersController < ApplicationController
   # create a new teacher in the database
   # pointed at by form 'create' in signup.html.erb
   def create
-    render :layout => false
     # take first and last name given in the form
     f_name = params[:fName].capitalize
     l_name = params[:lName].capitalize
@@ -54,6 +54,7 @@ class TeachersController < ApplicationController
 
   def edit
     @teacher = Teacher.find_by_email(session[:email])
+    names = @teacher.name.split
   end
 
   def update
