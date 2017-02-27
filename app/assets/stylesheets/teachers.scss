@@ -39,13 +39,19 @@
       h1 {
         display: inline-block;
         height: auto;
-        width: 95%;
+        width: 25%;
         font-size: 1.5vw;
       }
 
       a {
         display: inline-block;
-        margin-left: 2.8rem;
+        float: right;
+        clear: none;
+      }
+
+      i.fa-pencil {
+        font-size: 1.5vw;
+        padding-top: 4px;
       }
     }
 
