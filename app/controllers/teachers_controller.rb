@@ -16,6 +16,7 @@ class TeachersController < ApplicationController
   # create a new teacher in the database
   # pointed at by form 'create' in signup.html.erb
   def create
+
     # take first and last name given in the form
     f_name = params[:fName].capitalize
     l_name = params[:lName].capitalize
