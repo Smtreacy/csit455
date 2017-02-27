@@ -1,0 +1,25 @@
+<h1>Welcome, administrator!!</h1>
+
+<div class="">
+
+  <% if @courses.empty? %>
+      <h2 class="no_courses">No Courses yet</h2>
+
+      <a href="#"><div class="add_course">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        <h3>Add Course</h3>
+      </div></a>
+
+  <% else  %>
+      <ul>
+        <%= @courses.each do |course|  %>
+            <li>
+              <h2><%= course.name %></h2>
+              <h2><%= professor.name %></h2>
+            </li>
+        <% end %>
+      </ul>
+
+  <% end %>
+
+</div>

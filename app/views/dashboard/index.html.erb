@@ -17,13 +17,13 @@
              <%= course.books.each do |book| %>
                <h3><%= book.name %></h3>
              <% end %>
-           <% else %>
+        <% else %>
                <h3>No book</h3>
            <% end %>
          </div>
        </li>
      <% end %>
-   <% end %>
+<% end %>
  </ul>-->
 
 <h2>Hello Professor</h2>
@@ -32,14 +32,14 @@
 <button class="dropdown">Class One</button>
 <div class="panel">
   <!-- Note this form should pop up in the middle of the screen like the Sign up page im leaving it here for now -->
-    <form class="Book_order" action="/" method="post">
-      <label>Book Form</label> <br>
-      <input type="text" name="BookName" placeholder="BookName">
-      <input type="text" name="ISBN" placeholder="ISBN"><br>
-      <input type="text" name="Author" placeholder="Author"><br>
-      <input type="text" name="Edition" placeholder="Edition"><br>
-      <button type="submit">Submit</button>
-    </form>
+  <form class="Book_order" action="/" method="post">
+    <label>Book Form</label> <br>
+    <input type="text" name="BookName" placeholder="BookName">
+    <input type="text" name="ISBN" placeholder="ISBN"><br>
+    <input type="text" name="Author" placeholder="Author"><br>
+    <input type="text" name="Edition" placeholder="Edition"><br>
+    <button type="submit">Submit</button>
+  </form>
 </div>
 </div>
 <div id = "container" >
@@ -75,7 +75,6 @@
 <script>
     var acc = document.getElementsByClassName("dropdown");
     var i;
-
     for (i = 0; i < acc.length; i++) {
         acc[i].onclick = function() {
             this.classList.toggle("active");

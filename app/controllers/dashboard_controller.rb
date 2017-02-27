@@ -10,12 +10,19 @@ class DashboardController < ApplicationController
     @teacher = Teacher.find_by_email(session[:email])
 
     # if teacher is an admin redirect to admin home
-    # if @teacher.admin
-    #   redirect_to '/adminindex'
-    # end
+    if @teacher.admin
+      # check if admin intends to view teacher view
+      if session[:teacher]
 
-    @courses = @teacher.courses.all
-    render :layout => 'index'
+      else
+        # otherwise redirect them to admin page
+        redirect_to '/admin/index'
+        return
+      end
+    else
+      @courses = @teacher.courses.all
+      render :layout => 'index'
+    end
   end
 
   # different admin view

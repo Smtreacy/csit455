@@ -31,11 +31,28 @@
     margin: auto;
     margin-top: 2.5%;
 
-    h1 {
+    .profile-header {
       display: block;
       height: auto;
       width: 100%;
-      font-size: 1.5vw;
+
+      h1 {
+        display: inline-block;
+        height: auto;
+        width: 25%;
+        font-size: 1.5vw;
+      }
+
+      a {
+        display: inline-block;
+        float: right;
+        clear: none;
+      }
+
+      i.fa-pencil {
+        font-size: 1.5vw;
+        padding-top: 4px;
+      }
     }
 
     li {
@@ -51,12 +68,6 @@
       display: inline;
       font-size: 1vw;
       padding-left: 1rem;
-    }
-
-    i.fa-pencil {
-      position: relative;
-      left: 98.5%;
-      bottom: 5%;
     }
   }
 }
