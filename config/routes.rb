@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   get '/index' => 'dashboard#index'
   get '/signup' => 'dashboard#signup'
-  get '/adminindex' => 'dashboard#adminindex'
+  get '/admin/index' => 'admin#index'
 
   # set form submit to login controller
   post '/', to: 'dashboard#login'
