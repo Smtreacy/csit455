@@ -24,6 +24,10 @@
               <h2><%= course.teacher.name %></h2>
             </li>
         <% end %>
+        <a class="add-button" href="#"><div class="add_course">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <h3>Add Course</h3>
+        </div></a>
       </ul>
 
   <% end %>
@@ -47,6 +51,21 @@
                   }
               }
           )
+      });
+  });
+
+  $(document).ajaxComplete(function() {
+      $('p.exit').on("click", function () {
+          //hide the container to show login form
+          $('.ajax-cont').animate({"opacity": "0"}, {duration: 350, complete: function() {
+              $('.ajax-cont').css({"display": "none", "z-index": "-100"});
+          }});
+          //remove previous event listener on the ajax call, add a new one to just show the container
+          $('.add-button').off("click").on("click", function (a) {
+              a.preventDefault();  //prevent ajax call from happening again
+              $('.ajax-cont').css({"z-index": "100", "display": "block"});
+              $('.ajax-cont').animate({"opacity": "1"}, {duration: 350});
+          })
       });
   })
 </script>
