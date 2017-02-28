@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   resources :teachers do
     get 'logout', on: :member
-    resources :courses do
+    get 'admin/addcourse' => 'admin#add_course'
+    resources :courses, only: [:new, :delete] do
       resources :books
     end
   end
@@ -14,6 +15,8 @@ Rails.application.routes.draw do
   get '/index' => 'dashboard#index'
   get '/signup' => 'dashboard#signup'
   get '/admin/index' => 'admin#index'
+  # custom post for form (avoid collision of :teacher_id)
+  post '/teachers/courses' => 'courses#create'
 
   # set form submit to login controller
   post '/', to: 'dashboard#login'

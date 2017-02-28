@@ -1,21 +1,27 @@
-<h1>Welcome, administrator!!</h1>
+<div class="ajax-cont"></div> <!-- AJAX Destination -->
+<h1>Welcome, <%= @teacher.name %>!!</h1>
 
 <div class="">
+
+  <!-- Gives the ability to send back information to the user from controller -->
+  <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
 
   <% if @courses.empty? %>
       <h2 class="no_courses">No Courses yet</h2>
 
-      <a href="#"><div class="add_course">
+      <a class="add-button" href="#"><div class="add_course">
         <i class="fa fa-plus" aria-hidden="true"></i>
         <h3>Add Course</h3>
       </div></a>
 
   <% else  %>
       <ul>
-        <%= @courses.each do |course|  %>
+        <% @courses.each do |course|  %>
             <li>
               <h2><%= course.name %></h2>
-              <h2><%= professor.name %></h2>
+              <h2><%= course.teacher.name %></h2>
             </li>
         <% end %>
       </ul>
@@ -23,3 +29,24 @@
   <% end %>
 
 </div>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function () {
+      $('.ajax-cont').css({'opacity': '0', 'display':'none'});
+
+      $('.add-button').on("click", function (a) {
+          a.preventDefault();
+
+          $.ajax(
+              {
+                  url: '<%= new_teacher_course_url(@teacher) %>',
+                  cache: false,
+                  success: function (html) {
+                      $('.ajax-cont').append(html).css({"display": "block"})
+                          .animate({"opacity": "1"}, {duration: 350, queue: false});
+                  }
+              }
+          )
+      });
+  })
+</script>

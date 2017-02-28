@@ -8,17 +8,6 @@
   height: 100vh;
   background: image_url("books.jpg") center no-repeat;
 
-  //black overlay for image background
-  .overlay {
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-  }
-
   .login_form {
     position: absolute;
     margin: 0;
@@ -32,17 +21,6 @@
     border-radius: 5%;
 
     background-color: white;
-
-    .alert {
-      display: block;
-      width: 100%;
-      height: auto;
-      font-size: 0.8vw;
-      margin-bottom: 2%;
-    }
-
-    .alert-success { color: green; }
-    .alert-fail { color: lighten(red, 20%); }
 
     .login {
       display: block;

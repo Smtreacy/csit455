@@ -17,7 +17,7 @@
       </form>
       </div>
 
-    <div class="signup-cont"></div> <!-- AJAX Destination-->
+    <div class="ajax-cont"></div> <!-- AJAX Destination-->
   </div>
 </div>
 
@@ -25,7 +25,7 @@
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function(){
       //Hide AJAX destination at first
-      $('.signup-cont').css({"opacity": "0", "display": "none"});
+      $('.ajax-cont').css({"opacity": "0", "display": "none"});
 
       //AJAX call for signup form
       $('p.signup a').on("click", function (a){
@@ -35,7 +35,7 @@
                   url: '/signup',
                   cache: false,
                   success: function (html) {
-                      $('.signup-cont').append(html).css({"display": "block"})
+                      $('.ajax-cont').append(html).css({"display": "block"})
                           .animate({"opacity": "1"}, {duration: 350, queue: false});
 
                       $("input[name='confirmPass']").on('keyup', function() {
@@ -54,14 +54,14 @@
   $(document).ajaxComplete(function () {
       $('p.exit').on("click", function () {
           //hide the container to show login form
-          $('.signup-cont').animate({"opacity": "0"}, {duration: 350, complete: function() {
-              $('.signup-cont').css({"display": "none", "z-index": "-100"});
+          $('.ajax-cont').animate({"opacity": "0"}, {duration: 350, complete: function() {
+              $('.ajax-cont').css({"display": "none", "z-index": "-100"});
           }});
           //remove previous event listener on the ajax call, add a new one to just show the container
           $('p.signup a').off("click").on("click", function (a) {
               a.preventDefault();  //prevent ajax call from happening again
-              $('.signup-cont').css({"z-index": "100", "display": "block"});
-              $('.signup-cont').animate({"opacity": "1"}, {duration: 350});
+              $('.ajax-cont').css({"z-index": "100", "display": "block"});
+              $('.ajax-cont').animate({"opacity": "1"}, {duration: 350});
           })
       });
   });

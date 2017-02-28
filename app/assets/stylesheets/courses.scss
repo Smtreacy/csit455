@@ -1,3 +1,41 @@
 // Place all the styles related to the Courses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// new course form styles
+#new_course {
+  display: block;
+  width: 60%;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 3rem;
+
+  label, input, select {
+    display: inline-block;
+    width: auto;
+    float: left;
+  }
+
+  label {
+    width: 25%;
+    height: 10%;
+    clear: left;
+  }
+
+  select {
+    margin-left: 8px;
+  }
+
+  input[name='commit'] {
+    clear: both;
+    display: block;
+    padding: 4px;
+    margin: {
+      top: 3rem;
+      bottom: 2%;
+      left: 37.5%;
+    }
+
+    font-size: 0.8vw;
+  }
+}
