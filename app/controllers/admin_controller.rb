@@ -4,6 +4,8 @@ class AdminController < ApplicationController
   def index
     @teacher = Teacher.find_by_email(session[:email])
 
+    # if teacher is an admin, give ability to
+    # see and change ALL courses, books, etc..
     if @teacher.admin
       @courses = Course.all
     else

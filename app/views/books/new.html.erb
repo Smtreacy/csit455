@@ -1,0 +1,36 @@
+<div class="overlay">
+  <div class="book-form form-cont">
+    <h1 class="book-head form-head">Add a New Book</h1>
+    <p class="exit">X</p>
+
+    <%= form_for(@book, url: new_teacher_course_book_path, html: {method: :post}) do |f| %>
+        <%= f.label :title, "Name: " %>
+        <%= f.text_field :title %>
+
+        <%= f.label :author, "Author: " %>
+        <%= f.text_field :author %>
+
+        <%= f.label :edition, "Edition: " %>
+        <%= f.number_field(:edition, in: 1..100, step: 1) %>
+
+        <!-- Definitely will change this somehow to
+              to reflect ISBN numbers -->
+        <%= f.label :isbn, "ISBN Number: " %>
+        <%= f.text_field :isbn %>
+
+        <!-- on yes, add additional form fields via AJAX/JQuery -->
+        <div class="add-media">
+          <h4>Additional Media Required?</h4>
+          <input name="media" class="media-radio" type="radio" value="no"
+            checked="checked" />
+          <label for="media">No</label>
+
+          <input name="media" class="media-radio" type="radio" value="yes"/>
+          <label for="media">Yes</label>
+        </div>
+
+        <%= f.submit "Add Book" %>
+    <% end %>
+
+  </div>
+</div>
