@@ -21,5 +21,29 @@
         <h3>Department:</h3> <p><%= @teacher.department.upcase %></p>
       </li>
     </ul>
+
+    <!-- analytic information about classes? -->
+    <div class="profile-heaer">
+      <h1>Your Classes: </h1>
+      <hr/>
+    </div>
+
+    <ul>
+      <li>
+        <h3>Number of Courses:</h3> <p><%= @courses.size %></p>
+      </li>
+      <li>
+        <ul>
+          <li>
+            <h3>Courses without books:</h3>
+          </li>
+
+        </ul>
+      </li>
+    </ul>
+
+    <!-- Delete user account -->
+    <%= button_to 'Delete Account', teacher_path, method: :delete, \
+            data: {confirm: "Are you sure? This action cannot be undone."} %>
   </div>
 </div>

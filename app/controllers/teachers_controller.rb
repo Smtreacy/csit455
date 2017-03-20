@@ -7,6 +7,8 @@ class TeachersController < ApplicationController
 
   def show
     @teacher = Teacher.find_by_email(session[:email])
+    @courses = @teacher.courses.all
+    # @courses_without_books = Teacher.find_by_sql("SELECT ")
   end
 
   def new
