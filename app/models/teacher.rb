@@ -6,7 +6,7 @@ class Teacher < ApplicationRecord
 
   # validations to ensure data integrity
    validates :password, length: { minimum: 6 }, allow_nil: false
-   validates :name, :department, :admin, presence: :true
+   validates :name, :department, presence: :true
    validates :email, :format => {:with => /\A\S+@.+\.\S+\z/, :message =>
       "Please enter a valid email address! ie. john@example.com "}, uniqueness: :true
 end

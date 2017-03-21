@@ -28,22 +28,10 @@
 
 <h2>Hello Professor</h2>
 <p>Please Select a Class to modify the books required</p>
+
+<% @courses.each do |course| %>
 <div id = "container" >
-<button class="dropdown">Class One</button>
-<div class="panel">
-  <!-- Note this form should pop up in the middle of the screen like the Sign up page im leaving it here for now -->
-  <form class="Book_order" action="/" method="post">
-    <label>Book Form</label> <br>
-    <input type="text" name="BookName" placeholder="BookName">
-    <input type="text" name="ISBN" placeholder="ISBN"><br>
-    <input type="text" name="Author" placeholder="Author"><br>
-    <input type="text" name="Edition" placeholder="Edition"><br>
-    <button type="submit">Submit</button>
-  </form>
-</div>
-</div>
-<div id = "container" >
-<button class="dropdown">Class Two</button>
+<button class="dropdown"><%=course.name%></button>
 <div class="panel">
   <form class="Book_order" action="/" method="post">
     <label>Book Form</label> <br>
@@ -56,22 +44,9 @@
 
 </div>
 </div>
+<% end %>
 
-  <div id = "container" >
-<button class="dropdown">Class Three</button>
-<div class="panel">
-  <form class="Book_order" action="/" method="post">
-    <label>Book Form</label> <br>
-    <input type="text" name="BookName" placeholder="BookName">
-    <input type="text" name="ISBN" placeholder="ISBN"><br>
-    <input type="text" name="Author" placeholder="Author"><br>
-    <input type="text" name="Edition" placeholder="Edition"><br>
-    <button type="submit">Submit</button>
-  </form>
-
-</div>
-  </div>
-
+<!-- JavaScript for accordion drop down -->
 <script>
     var acc = document.getElementsByClassName("dropdown");
     var i;
