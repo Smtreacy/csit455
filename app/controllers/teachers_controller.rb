@@ -29,10 +29,10 @@ class TeachersController < ApplicationController
     if params[:su_password] == params[:confirmPass]
       @teacher = Teacher.new({department: params[:department].upcase, name: full_name,
                               email: params[:email], password: params[:su_password],
-                              password_confirmation: params[:confirmPass], admin: params[:admin] ? true : false})
+                              password_confirmation: params[:confirmPass], admin: params[:admin] == 'true' ? true : false})
     else
       # ADD FLASH MESSAGE
-      flash[:fail] = "The passwords entered do not match! #{params[:su_password]} and #{params[:confirmPass]}"
+      flash[:fail] = "The passwords entered do not match!"
       redirect_back(fallback_location: '/')
       return
     end
