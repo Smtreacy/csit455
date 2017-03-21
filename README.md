@@ -17,6 +17,7 @@ Some useful links are outlined below to get you up and running with rails:
     - a simple program to make installing Ruby very fast and easy. 
     
 ###Windows Users
+
 To my Windows friends, good luck. Installing Rails can be a real pain. My recommendation is to set up Bash on Ubuntu on Windows
 and run all the rails commands from the terminal. However there are some hoops to jump through in order to get the application working.
 For example, Windows Bash (the aforementioned) does not support filewatchers, which rails uses while Puma is running to auto-load the site.

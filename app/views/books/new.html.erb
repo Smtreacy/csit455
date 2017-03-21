@@ -3,7 +3,7 @@
     <h1 class="book-head form-head">Add a New Book</h1>
     <p class="exit">X</p>
 
-    <%= form_for(@book, url: teacher_course_books_path, html: {method: :post}) do |f| %>
+    <%= form_for(setup_book(book), url: teacher_course_books_path, html: {method: :post}) do |f| %>
       <%= f.label :title, "Name: " %>
       <%= f.text_field :title %>
 
@@ -21,12 +21,34 @@
       <!-- on yes, add additional form fields via AJAX/JQuery -->
       <div class="add-media">
         <h4>Additional Media Required?</h4>
-        <input name="media" class="media-radio" type="radio" value="no"
-          checked="checked" />
-        <label for="media">No</label>
+        <input class="media-check" type="checkbox">
+        <label>yes</label>
 
-        <input name="media" class="media-radio" type="radio" value="yes"/>
-        <label for="media">Yes</label>
+        <!-- hidden unless media checkbox is checked-->
+        <div class="media-form">
+          <% f.fields_for :media do |ff| %>
+            <%= ff.label :name %>
+            <%= ff.text_field :name %>
+
+            <%= ff.label :author %>
+            <%= ff.text_field :author %>
+
+            <%= ff.label :edition %>
+            <%= ff.number_field(:edition, in: 1..100, step: 1) %>>
+
+            <div class="website">
+              <h4>Does this media need website information?</h4>
+              <input type="checkbox" class="web-check" />
+              <label>yes</label>
+
+              <!-- hidden unless website box is checked -->
+              <div class="website-field">
+                <%= ff.label :website %>
+                <%= ff.text_field :website %>
+              </div>
+            </div>
+        <% end %>
+        </div>
       </div>
 
       <%= f.submit "Add Book" %>

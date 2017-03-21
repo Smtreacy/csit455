@@ -20,6 +20,7 @@ class DashboardController < ApplicationController
         return
       end
     else
+      # return courses related to the courses
       @courses = @teacher.courses.all
       render :layout => 'index'
     end
@@ -45,7 +46,7 @@ class DashboardController < ApplicationController
     if session[:login]
       # redirect_to '/index'
     else
-
+      # continue showing the view
     end
   end
 

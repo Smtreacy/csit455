@@ -5,24 +5,24 @@
           ie. with a .each loop. I'll add the structure I had before at the top here
           for reference -->
 <!--<ul>
-    <% if @courses.empty? %>
-      <h1>No data</h1>
-    <% else %>
-    <%= @courses.each do |course|  %>
-       <li>
-         <h1><%= course.name %></h1>
-         <div>
-           <% if course.books.empty? %>
-               <h1>True</h1>
-             <%= course.books.each do |book| %>
-               <h3><%= book.name %></h3>
-             <% end %>
+<% if @courses.empty? %>
+  <h1>No data</h1>
+<% else %>
+<%= @courses.each do |course|  %>
+   <li>
+     <h1><%= course.name %></h1>
+     <div>
+       <% if course.books.empty? %>
+           <h1>True</h1>
+         <%= course.books.each do |book| %>
+           <h3><%= book.name %></h3>
+         <% end %>
         <% else %>
-               <h3>No book</h3>
-           <% end %>
-         </div>
-       </li>
-     <% end %>
+           <h3>No book</h3>
+        <% end %>
+     </div>
+   </li>
+ <% end %>
 <% end %>
  </ul>-->
 
@@ -50,6 +50,7 @@
 <script>
     var acc = document.getElementsByClassName("dropdown");
     var i;
+
     for (i = 0; i < acc.length; i++) {
         acc[i].onclick = function() {
             this.classList.toggle("active");
