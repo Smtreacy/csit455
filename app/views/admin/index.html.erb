@@ -1,5 +1,5 @@
 <div class="ajax-cont"></div> <!-- AJAX Destination -->
-<h1>Welcome, <%= @teacher.name %>!!</h1>
+<h1 class="welcome_message">Welcome, <%= @teacher.name %>!!</h1>
 
 <div class="admin-cont">
 
@@ -18,18 +18,20 @@
 
   <% else  %>
       <!-- needs to be changed to reflect design structure -->
-      <ul>
+      <ul class="course_list">
         <% @courses.each do |course|  %>
-            <li>
-              <h2><%= course.name %></h2>
-              <h2><%= course.teacher.name %></h2>
+            <li class="course_entry">
+              <h2 class="course_name"><%= course.name %></h2>
+              <h2 class="teacher_name"><%= course.teacher.name %></h2>
             </li>
         <% end %>
-        <a class="add-button" href="#"><div class="add_course">
-          <i class="fa fa-plus" aria-hidden="true"></i>
-          <h3>Add Course</h3>
-        </div></a>
+
       </ul>
+
+      <div class="add_course">
+        <a class="add-button" href="#"><i class="fa fa-plus" aria-hidden="true"></i>
+        <h3>Add Course</h3></a>
+      </div>
 
   <% end %>
 
