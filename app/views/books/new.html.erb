@@ -3,7 +3,7 @@
     <h1 class="book-head form-head">Add a New Book</h1>
     <p class="exit">X</p>
 
-    <%= form_for(setup_book(book), url: teacher_course_books_path, html: {method: :post}) do |f| %>
+    <%= form_for(@book, url: teacher_course_books_path, html: {method: :post}) do |f| %>
       <%= f.label :title, "Name: " %>
       <%= f.text_field :title %>
 
@@ -26,15 +26,18 @@
 
         <!-- hidden unless media checkbox is checked-->
         <div class="media-form">
-          <% f.fields_for :media do |ff| %>
-            <%= ff.label :name %>
+          <%= f.fields_for :media do |ff| %>
+            <%= ff.label :name, "Media Name: " %>
             <%= ff.text_field :name %>
 
-            <%= ff.label :author %>
+            <%= ff.label :author, "Media Author: " %>
             <%= ff.text_field :author %>
 
-            <%= ff.label :edition %>
-            <%= ff.number_field(:edition, in: 1..100, step: 1) %>>
+            <%= ff.label :edition, "Media Edition: " %>
+            <%= ff.number_field(:edition, in: 1..100, step: 1) %>
+
+            <%= ff.label :isbn, "ISBN Number: " %>
+            <%= ff.text_field :isbn %>
 
             <div class="website">
               <h4>Does this media need website information?</h4>

@@ -1,7 +1,7 @@
 class TeachersController < ApplicationController
   protect_from_forgery except: [:create]
   # always render using the index layout
-  layout  'index'
+  layout'index'
   attr_accessor :first
   attr_accessor :last
 

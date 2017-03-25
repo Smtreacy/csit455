@@ -1,49 +1,44 @@
-<!-- Google 'GOogle Icons' or "Font Awesome" use that instead of images -->
-<!-- TR: All styles moved to /app/assets/index.scss for easier management -->
+<div class="ajax-cont">
 
-<!-- TR: The structure here looks great, we just need to work on generating this procedurally
-          ie. with a .each loop. I'll add the structure I had before at the top here
-          for reference -->
-<!--<ul>
-<% if @courses.empty? %>
-  <h1>No data</h1>
-<% else %>
-<%= @courses.each do |course|  %>
-   <li>
-     <h1><%= course.name %></h1>
-     <div>
-       <% if course.books.empty? %>
-           <h1>True</h1>
-         <%= course.books.each do |book| %>
-           <h3><%= book.name %></h3>
-         <% end %>
-        <% else %>
-           <h3>No book</h3>
-        <% end %>
-     </div>
-   </li>
- <% end %>
-<% end %>
- </ul>-->
+</div> <!-- AJAX Destination -->
 
 <h2>Hello Professor</h2>
 <p>Please Select a Class to modify the books required</p>
-
+<!-- Gives the ability to send back information to the user from controller -->
+<% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
 <% @courses.each do |course| %>
-<div id = "container" >
-<button class="dropdown"><%=course.name%></button>
-<div class="panel">
-  <form class="Book_order" action="/" method="post">
-    <label>Book Form</label> <br>
-    <input type="text" name="BookName" placeholder="BookName">
-    <input type="text" name="ISBN" placeholder="ISBN"><br>
-    <input type="text" name="Author" placeholder="Author"><br>
-    <input type="text" name="Edition" placeholder="Edition"><br>
-    <button type="submit">Submit</button>
-  </form>
-
-</div>
-</div>
+  <div id="container" >
+    <button class="dropdown"><%=course.name%></button>
+    <div class="panel">
+      <table>
+        <thead>
+          <tr>
+            <th>Title:</th>
+            <th>Author:</th>
+            <th>ISBN:</th>
+            <th>Edition:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% course.books.each do |book| %>
+            <tr>
+              <th><%= book.title %></th>
+              <th><%= book.author %></th>
+              <th><%= book.isbn %></th>
+              <th><%= book.edition %></th>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <a href="#" class="add-book">
+        <div id="add-book-btn">
+          <p class="btn-text">Add New Book</p>
+        </div>
+      </a>
+    </div>
+  </div>
 <% end %>
 
 <!-- JavaScript for accordion drop down -->
@@ -51,7 +46,7 @@
     var acc = document.getElementsByClassName("dropdown");
     var i;
 
-    for (i = 0; i < acc.length; i++) {
+    for (i = 0; i < acc.length; ++i) {
         acc[i].onclick = function() {
             this.classList.toggle("active");
             var panel = this.nextElementSibling;
@@ -62,4 +57,38 @@
             }
         }
     }
+
+    /* AJAX JQuery for adding books form */
+    $(document).ready(function () {
+        $('.ajax-cont').css({'opacity': '0', 'display':'none'});
+
+        <% index = 0 %>
+        $('.add-book').click(function(a) {
+            a.preventDefault();
+            $.ajax(
+                {
+                    url: '<%= "/teachers/#{@teacher.id}/courses/#{@course_ids[index].id}/books/new" %>',
+                    cache: false,
+                    success: function (html) {
+                        console.log("Success!");
+                        $('.ajax-cont').html(html).css({"display": "block", "z-index":"100"})
+                            .animate({"opacity": "1"}, {duration: 350, queue: false});
+                    }
+                }
+            );
+            <% index += 1 %>
+        });
+    });
+
+    $(document).ajaxComplete(function() {
+        /* Add closing animation */
+        $('p.exit').click(function() {
+            //hide the container to show login form
+            $('.ajax-cont').animate({"opacity": "0"}, {duration: 350, complete: () => {
+                $('.ajax-cont').css({"display": "none", "z-index": "-100"});
+            }});
+        });
+
+
+    })
 </script>

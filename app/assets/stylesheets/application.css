@@ -28,6 +28,13 @@ a {
     color: inherit;
 }
 
+a, div, button {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 li {
     list-style-type: none;
 }

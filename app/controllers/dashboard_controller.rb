@@ -22,6 +22,7 @@ class DashboardController < ApplicationController
     else
       # return courses related to the courses
       @courses = @teacher.courses.all
+      @course_ids = @courses.each {|c| c.id }
       render :layout => 'index'
     end
   end

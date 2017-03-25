@@ -3,8 +3,7 @@ module BooksHelper
   def setup_book(book)
     # this adds a blank medium object to the book object
     # if one does not exist already (||=)
-    book.medium ||= Medium.new
-
+    book.media ||= Medium.new
     # return book with associated medium
     book
   end
