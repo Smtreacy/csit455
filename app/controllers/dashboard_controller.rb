@@ -12,31 +12,16 @@ class DashboardController < ApplicationController
     # if teacher is an admin redirect to admin home
     if @teacher.admin
       # check if admin intends to view teacher view
-      if session[:teacher]
+      if !session[:admin]
 
       else
         # otherwise redirect them to admin page
         redirect_to '/admin/index'
         return
       end
-    else
-      # return courses related to the courses
-      @courses = @teacher.courses.all
-      @course_ids = @courses.each {|c| c.id }
-      render :layout => 'index'
-    end
-  end
-
-  # different admin view
-  def adminindex
-    @teacher = Teacher.find_by_email(session[:email])
-    if @teacher.admin
-
-    else
-      flash[:fail] = "There was a problem logging you in!"
-      redirect_back(fallback_location: '/')
     end
 
+    # return courses related to the courses
     @courses = @teacher.courses.all
     render :layout => 'index'
   end
@@ -63,6 +48,9 @@ class DashboardController < ApplicationController
       # add user information to session
       session[:login] = true
       session[:email] = @user.email
+      if @user.admin
+        session[:admin] = true
+      end
       redirect_to '/index'
     # else create an error and send back to authenticate view
     else

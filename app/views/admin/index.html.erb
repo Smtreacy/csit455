@@ -8,6 +8,14 @@
       <div class="alert alert-<%= message_type %>"><%= message %></div>
   <% end %>
 
+  <% if @teacher.admin %>
+      <a href="/admin/toggle"><div class="switch-btn">
+        <p class="switch-txt">
+          Teacher View
+        </p>
+      </div></a>
+  <% end %>
+
   <% if @courses.empty? %>
       <h2 class="no_courses">No Courses yet</h2>
 

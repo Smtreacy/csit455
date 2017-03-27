@@ -13,7 +13,7 @@ div#container {
     color: #444;
     cursor: pointer;
     width: 80%;
-    height: .1%px;
+    height: .1%;
     padding: 18px;
     margin-top: .5%;
     font-size: 25px;
@@ -86,4 +86,16 @@ tr:nth-child(even) {
   -webkit-box-shadow: 7px 7px 16px -8px rgba(0,0,0,0.75);
   -moz-box-shadow: 7px 7px 16px -8px rgba(0,0,0,0.75);
   box-shadow: 7px 7px 16px -8px rgba(0,0,0,0.75);
+}
+
+.switch-btn {
+  display: inline-block;
+  position: absolute;
+  top: 80px;
+  right: 1rem;
+  height: 25px;
+  width: auto;
+  padding: 4px 16px;
+  @include border-radius(15px);
+  background-color: orangered;
 }

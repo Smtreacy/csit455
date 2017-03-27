@@ -8,6 +8,14 @@
 <% flash.each do |message_type, message| %>
     <div class="alert alert-<%= message_type %>"><%= message %></div>
 <% end %>
+
+<% if @teacher.admin %>
+    <a href="/admin/toggle"><div class="switch-btn">
+      <p class="switch-txt">
+        Admin View
+      </p>
+    </div></a>
+<% end %>
 <% @courses.each do |course| %>
   <div id="container" >
     <button class="dropdown"><%=course.name%></button>
@@ -32,7 +40,7 @@
           <% end %>
         </tbody>
       </table>
-      <a href="#" class="add-book">
+      <a href="#" onclick="bookAjax(<%= @teacher.id %>, <%= course.id %>)" class="add-book">
         <div id="add-book-btn">
           <p class="btn-text">Add New Book</p>
         </div>
@@ -59,25 +67,24 @@
     }
 
     /* AJAX JQuery for adding books form */
+    function bookAjax(t_id, c_id) {
+        $.ajax(
+            {
+                url: '/teachers/' + t_id + '/courses/' + c_id + '/books/new',
+                cache: false,
+                success: function (html) {
+                    console.log("Success! T_id: " + t_id + "  C_id: "+c_id);
+                    $('.ajax-cont').html(html).css({"display": "block", "z-index": "100"})
+                        .animate({"opacity": "1"}, {duration: 350, queue: false});
+                }
+            }
+        );
+    }
+
     $(document).ready(function () {
         $('.ajax-cont').css({'opacity': '0', 'display':'none'});
 
-        <% index = 0 %>
-        $('.add-book').click(function(a) {
-            a.preventDefault();
-            $.ajax(
-                {
-                    url: '<%= "/teachers/#{@teacher.id}/courses/#{@course_ids[index].id}/books/new" %>',
-                    cache: false,
-                    success: function (html) {
-                        console.log("Success!");
-                        $('.ajax-cont').html(html).css({"display": "block", "z-index":"100"})
-                            .animate({"opacity": "1"}, {duration: 350, queue: false});
-                    }
-                }
-            );
-            <% index += 1 %>
-        });
+        $('a.add-book').on("click", (a)=>{a.preventDefault();})
     });
 
     $(document).ajaxComplete(function() {

@@ -6,7 +6,7 @@ class AdminController < ApplicationController
 
     # if teacher is an admin, give ability to
     # see and change ALL courses, books, etc..
-    if @teacher.admin
+    if @teacher.admin && session[:admin]
       @courses = Course.all
     else
       flash[:fail] = "You do not have admin privliges!"
@@ -26,6 +26,15 @@ class AdminController < ApplicationController
     else
       flash[:fail] = "Unable to render course form"
       redirect_back(fallback="/index")
+    end
+  end
+
+  def toggle
+    session[:admin] = !session[:admin]
+    if session[:admin]
+      redirect_to "/admin/index"
+    else
+      redirect_to "/index"
     end
   end
 

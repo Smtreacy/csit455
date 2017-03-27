@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/index' => 'dashboard#index'
   get '/signup' => 'dashboard#signup'
   get '/admin/index' => 'admin#index'
+  get '/admin/toggle' => 'admin#toggle'
   # custom post for form (avoid collision of :teacher_id)
   post '/teachers/courses' => 'courses#create'
 
