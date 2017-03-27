@@ -46,5 +46,44 @@ div#container {
     width: 80%;
     display: inline-block;
   transition: max-height 0.2s ease-out;
-  }
+}
 
+table {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.title {
+  font-size: 1.8em;
+}
+
+th, td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+
+#add-book {
+  width: 10%;
+  margin-left: 45%;
+  margin-right: 45%;
+}
+
+#add-book-btn {
+  width: 10%;
+  border: 2px solid black;
+  border-radius: 3px;
+  margin-left: 45%;
+  margin-right: 45%;
+  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  -webkit-box-shadow: 7px 7px 16px -8px rgba(0,0,0,0.75);
+  -moz-box-shadow: 7px 7px 16px -8px rgba(0,0,0,0.75);
+  box-shadow: 7px 7px 16px -8px rgba(0,0,0,0.75);
+}
