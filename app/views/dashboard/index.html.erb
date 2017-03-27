@@ -1,7 +1,6 @@
 <div class="ajax-cont">
 
 </div> <!-- AJAX Destination -->
-
 <h2>Hello Professor</h2>
 <p>Please Select a Class to modify the books required</p>
 <!-- Gives the ability to send back information to the user from controller -->
@@ -45,6 +44,8 @@
           <p class="btn-text">Add New Book</p>
         </div>
       </a>
+      <!-- button for confirming + sending to admin -->
+      <input type="submit" onclick="clicked('<%=course.name%>');" value="Submit Book List" />
     </div>
   </div>
 <% end %>
@@ -62,6 +63,16 @@
                 panel.style.maxHeight = null;
             } else {
                 panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
+    }
+<!-- script for confirming prof wants to submit to Admin -->
+    {
+        function clicked(CName) {
+            if (confirm('Are you sure you wish to submit this booklist for ' + CName + ' ?')) {
+                yourformelement.submit();
+            } else {
+                return false;
             }
         }
     }
