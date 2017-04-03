@@ -22,7 +22,16 @@
 
 <% @courses.each do |course| %>
   <div id="container" >
-    <button class="dropdown"><%=course.name%></button>
+    <button class="dropdown" data-course-id="<%= course.id %>">
+      <%=course.name%>
+      <% if course.submitted %>
+        <i class="fa fa-check"></i>
+        <p class="course-submitted">Course submitted!</p>
+      <% else %>
+        <i class="fa fa-check hidden"></i>
+          <p class="course-submitted hidden">Course submitted!</p>
+      <% end %>
+    </button>
     <div class="panel">
       <table>
         <thead>
@@ -50,7 +59,10 @@
         </div>
       </a>
       <!-- button for confirming + sending to admin -->
-      <input type="submit" onclick="clicked('<%=course.name%>');" value="Submit Book List" />
+      <div id="add-book-btn" class="submit-course"
+           onclick="clicked('<%=course.name%>', <%= @teacher.id %>, <%= course.id %>);">
+        <p class="btn-txt">Submit Course</p>
+      </div>
     </div>
   </div>
 <% end %>
@@ -59,7 +71,7 @@
 <script>
     var acc = document.getElementsByClassName("dropdown");
     var i;
-
+    // add accordion animations
     for (i = 0; i < acc.length; ++i) {
         acc[i].onclick = function() {
             this.classList.toggle("active");
@@ -71,14 +83,22 @@
             }
         }
     }
-<!-- script for confirming prof wants to submit to Admin -->
-    {
-        function clicked(CName) {
-            if (confirm('Are you sure you wish to submit this booklist for ' + CName + ' ?')) {
-                yourformelement.submit();
-            } else {
-                return false;
-            }
+    <!-- script for confirming prof wants to submit to Admin -->
+    function clicked(CName, t_id, c_id) {
+        if (confirm('Are you sure you wish to submit this booklist for ' + CName + ' ?')) {
+            $.ajax(
+                {
+                    url: '/teachers/' + t_id + '/courses/' + c_id + '/submit',
+                    cache: false,
+                    success: () => {
+                        console.log("Course submitted properly");
+                        $('button[data-course-id="'+c_id+'"] i').toggleClass('hidden');
+                        $('button[data-course-id="'+c_id+'"] p').toggleClass('hidden');
+                    }
+                }
+            )
+        } else {
+            return false;
         }
     }
 
@@ -92,6 +112,14 @@
                     console.log("Success! T_id: " + t_id + "  C_id: "+c_id);
                     $('.ajax-cont').html(html).css({"display": "block", "z-index": "100"})
                         .animate({"opacity": "1"}, {duration: 350, queue: false});
+
+                    /* Add closing animation */
+                    $('p.exit').click(function() {
+                        //hide the container to show login form
+                        $('.ajax-cont').animate({"opacity": "0"}, {duration: 350, complete: () => {
+                            $('.ajax-cont').css({"display": "none", "z-index": "-100"});
+                        }});
+                    });
                 }
             }
         );
@@ -102,16 +130,4 @@
 
         $('a.add-book').on("click", (a)=>{a.preventDefault();})
     });
-
-    $(document).ajaxComplete(function() {
-        /* Add closing animation */
-        $('p.exit').click(function() {
-            //hide the container to show login form
-            $('.ajax-cont').animate({"opacity": "0"}, {duration: 350, complete: () => {
-                $('.ajax-cont').css({"display": "none", "z-index": "-100"});
-            }});
-        });
-
-
-    })
 </script>

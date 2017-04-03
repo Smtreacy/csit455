@@ -49,10 +49,19 @@ class CoursesController < ApplicationController
     end
   end
 
+  def submit
+    course = Course.find(params[:id])
+    if !course.submitted
+      course.update(submitted: true)
+    else
+      course.update(submitted: false)
+    end
+  end
+
   private
 
   # helper function for validating parameters passed by course form
   def course_params
-    params.require(:course).permit(:teacher_id, :name, :deptName, :section)
+    params.require(:course).permit(:teacher_id, :name, :deptName, :section, :submitted)
   end
 end

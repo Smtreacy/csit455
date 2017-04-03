@@ -3,48 +3,60 @@
 //ST:Need this so that way the dropdown menu is centered
 //ST:removed width 80% to git it a fuller look
 div#container {
-  margin-left: auto;
-  margin-right:auto;
+  margin: auto;
   text-align: center;
 }
 
-  button.dropdown {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    width: 80%;
-    height: .1%;
-    padding: 18px;
-    margin-top: .5%;
-    font-size: 25px;
-    transition: 0.4s;
+.dropdown {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  width: 80%;
+  height: .1%;
+  padding: 18px;
+  margin-top: .5%;
+  font-size: 25px;
+  transition: 0.4s;
+
+  .fa-check, .course-submitted {
+    padding-left: 8px;
+    color: green;
   }
 
-  button.dropdown.active {
-    background-color: #ddd;
+  .course-submitted {
+    display: inline;
   }
-
-  //affects the +/- sign
-  button.dropdown:after {
-    content: '\002B';
-    color: #777;
-    font-weight: bold;
-    float: right;
-    text-align: center;
+  
+  .hidden {
+    display: none;
   }
+}
 
-  button.dropdown.active:after {
-    content: "\2212";
+.dropdown.active {
+  background-color: #ddd;
+}
 
-  }
+//affects the +/- sign
+.dropdown:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  text-align: center;
+}
 
-  div.panel {
-    background-color: white;
-    max-height: 0;
-    overflow: hidden;
-    text-align: center;
-    width: 80%;
-    display: inline-block;
+.dropdown.active:after {
+  content: "\2212";
+
+}
+
+div.panel {
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  text-align: center;
+  width: 80%;
+  display: inline-block;
   transition: max-height 0.2s ease-out;
 }
 

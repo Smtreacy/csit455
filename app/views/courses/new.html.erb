@@ -21,6 +21,8 @@
       <%= f.hidden_field(:deptName, :value => \
             @teachers.find_by(email: session[:email]).department ) %>
 
+      <%= f.hidden_field(:submitted, :value => false) %>
+
       <%= f.submit "Create Course"%>
     <% end %>
   </div>
