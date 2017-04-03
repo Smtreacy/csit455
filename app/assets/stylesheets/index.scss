@@ -83,9 +83,8 @@ tr:nth-child(even) {
   margin-bottom: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
-  -webkit-box-shadow: 7px 7px 16px -8px rgba(0,0,0,0.75);
-  -moz-box-shadow: 7px 7px 16px -8px rgba(0,0,0,0.75);
-  box-shadow: 7px 7px 16px -8px rgba(0,0,0,0.75);
+  // More concise syntax
+  @include box-shadow(7px 7px 16px -8p, rgba(0,0,0,0.75))
 }
 
 .switch-btn {
@@ -95,7 +94,26 @@ tr:nth-child(even) {
   right: 1rem;
   height: 25px;
   width: auto;
+
   padding: 4px 16px;
-  @include border-radius(15px);
-  background-color: orangered;
+  @include border-radius(20px);
+  background-color: lighten(goldenrod, 7.5);
+  @include box-shadow(0 3px darken(goldenrod, 5));
+
+  &:hover {
+    -webkit-transform: translateY(2px);
+    -moz-transform: translateY(2px);
+    -ms-transform: translateY(2px);
+    -o-transform: translateY(2px);
+    transform: translateY(2px);
+
+    @include box-shadow(0 1.5px darken(#ffb347, 20));
+  }
+
+  .switch-txt {
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-top: 4px;
+    color: white;
+  }
 }

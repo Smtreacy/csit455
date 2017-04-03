@@ -1,8 +1,12 @@
 <div class="ajax-cont">
 
 </div> <!-- AJAX Destination -->
-<h2>Hello Professor</h2>
-<p>Please Select a Class to modify the books required</p>
+
+<div class="large-header">
+  <h2>Welcome home, <span><%= @teacher.name %></span></h2>
+  <p>Please Select a course to modify the required books</p>
+</div>
+
 <!-- Gives the ability to send back information to the user from controller -->
 <% flash.each do |message_type, message| %>
     <div class="alert alert-<%= message_type %>"><%= message %></div>
@@ -15,6 +19,7 @@
       </p>
     </div></a>
 <% end %>
+
 <% @courses.each do |course| %>
   <div id="container" >
     <button class="dropdown"><%=course.name%></button>

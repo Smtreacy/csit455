@@ -12,11 +12,11 @@
     position: absolute;
     margin: 0;
     width: 30%;
-    left: 35%;
-    right: 35%;
+    left: 34%;
+    right: 34%;
     border: 1px solid black;
     height: auto;
-    top: 25%;
+    top: 32.5%;
     padding: 5px;
     border-radius: 5%;
 
@@ -67,5 +67,23 @@
         }
       }
     }
+  }
+
+  .logo {
+    .logo-txt, span {
+      font-family: 'Fredericka the Great', "Open Sans", "Arial", sans-serif;
+      font-size: 8rem;
+      font-weight: 400;
+      color: white;
+    }
+
+    span {
+      color: lighten(goldenrod, 20);
+    }
+
+    display: block;
+    height: 4rem;
+    width: 26%;
+    margin: 6rem auto;
   }
 }
