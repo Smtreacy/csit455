@@ -86,9 +86,28 @@
     }
   }
 
-  .spacer {
+  .large-header {
     display: block;
-    width: 100vw;
-    height: 8.5vh;
+    float: left;
+    clear: both;
+    width: 100%;
+    height: 85px;
+    background-color: lighten(black, 15);
+
+    margin-bottom: 8.5vh;
+    text-align: center;
+    color: white;
+
+    h2, span { font-size: 2.6em; }
+    p {
+      font-size: 1.3em;
+      padding-top: 8px;
+    }
   }
+
+  //.spacer {
+  //  display: block;
+  //  width: 100vw;
+  //  height: 8.5vh;
+  //}
 }

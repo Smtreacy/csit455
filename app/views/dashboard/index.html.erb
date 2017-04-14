@@ -3,7 +3,7 @@
 </div> <!-- AJAX Destination -->
 
 <div class="large-header">
-  <h2>Welcome home, <span><%= @teacher.name %></span></h2>
+  <h2>Welcome home, <%= @teacher.name %></h2>
   <p>Please Select a course to modify the required books</p>
 </div>
 
@@ -33,6 +33,8 @@
       <% end %>
     </button>
     <div class="panel">
+      <div class="course-overlay"
+        style="display:<%= course.submitted ? 'block' : 'none'%>"></div> <!-- gray out the information until user unsubmitts course -->
       <table>
         <thead>
           <tr class="top">
@@ -55,13 +57,15 @@
       </table>
       <a href="#" onclick="bookAjax(<%= @teacher.id %>, <%= course.id %>)" class="add-book">
         <div id="add-book-btn">
+          <span class="icon plus"><i class="fa fa-plus"></i></span>
           <p class="btn-text">Add New Book</p>
         </div>
       </a>
       <!-- button for confirming + sending to admin -->
       <div id="add-book-btn" class="submit-course"
            onclick="clicked('<%=course.name%>', <%= @teacher.id %>, <%= course.id %>);">
-        <p class="btn-txt">Submit Course</p>
+        <span class="icon check"><i class="fa fa-check"></i></span>
+        <p class="btn-text">Submit Course</p>
       </div>
     </div>
   </div>
@@ -83,7 +87,6 @@
             }
         }
     }
-<<<<<<< Updated upstream
     <!-- script for confirming prof wants to submit to Admin -->
     function clicked(CName, t_id, c_id) {
         if (confirm('Are you sure you wish to submit this booklist for ' + CName + ' ?')) {
@@ -100,15 +103,6 @@
             )
         } else {
             return false;
-<!-- script for confirming prof wants to submit to Admin -->
-    {
-        function clicked(CName) {
-            if (confirm('Are you sure you wish to submit this booklist for ' + CName + ' ?')) {
-                
-            } else {
-                return false;
-            }
-
         }
     }
 
