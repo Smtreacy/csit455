@@ -70,5 +70,4 @@ class TeachersController < ApplicationController
     # redirect to dashboard#authenticate
     redirect_to '/'
   end
-
 end
