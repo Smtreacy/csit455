@@ -23,19 +23,32 @@
         <i class="fa fa-plus" aria-hidden="true"></i>
         <h3>Add Course</h3>
       </div></a>
-
+<!---- Change this from here --->
   <% else  %>
       <!-- needs to be changed to reflect design structure -->
       <ul class="course_list">
-        <% @courses.each do |course|  %>
+        <% @courses.each do |course| %>
             <li class="course_entry">
               <h2 class="course_name"><%= course.name %></h2>
               <h2 class="teacher_name"><%= course.teacher.name %></h2>
+              <!-- This is my book order stuff, Need to make it so the right books go into the right slots above -->
+              <!-- @books is in Admin_controller.rb -->
+              <% course.books.each do |book|  %>
+                <li class = "Book Entry">
+                  <h2 class="Book_Name"><%= book.title %></h2>
+                </li>
+                <!-- This is my book order stuff, Need to make it so the right books go into the right slots above -->
+      <%end%>
+
             </li>
         <% end %>
 
-      </ul>
 
+
+
+
+      </ul>
+<!--- to here for drop down menu. Keep the @Course.each -->
       <div class="add_course">
         <a class="add-button" href="#"><i class="fa fa-plus" aria-hidden="true"></i>
         <h3>Add Course</h3></a>
