@@ -1,8 +1,4 @@
-<div class="left-nav">
-
-</div>
-
-<div class="content">
+<div class="content-left">
   <div class="profile-info">
     <div class="profile-header">
       <h1>Your Profile:</h1>
@@ -21,9 +17,13 @@
         <h3>Department:</h3> <p><%= @teacher.department.upcase %></p>
       </li>
     </ul>
+</div>
+</div>
 
+<div class="content-right">
+  <div class="profile-stats"
     <!-- analytic information about classes? -->
-    <div class="profile-heaer">
+    <div class="profile-header">
       <h1>Your Classes: </h1>
       <hr/>
     </div>
@@ -33,17 +33,16 @@
         <h3>Number of Courses:</h3> <p><%= @courses.size %></p>
       </li>
       <li>
-        <ul>
           <li>
             <h3>Courses without books:</h3>
           </li>
-
-        </ul>
       </li>
     </ul>
-
-    <!-- Delete user account -->
-    <%= button_to 'Delete Account', teacher_path, method: :delete, \
-            data: {confirm: "Are you sure? This action cannot be undone."} %>
   </div>
+</div>
+
+<!-- Delete user account -->
+<div class="delete-button">
+  <%= button_to 'Delete Account', teacher_path, method: :delete, \
+          data: {confirm: "Are you sure? This action cannot be undone."} %>
 </div>

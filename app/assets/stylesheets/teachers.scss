@@ -5,24 +5,76 @@
 /**
   SHOW.HTML.ERB STYLES
  */
-.left-nav {
-  display: inline-block;
-  float: left;
-  clear: none;
-  width: 15vw;
-  height: 77.5vh;
-  margin-left: 4vw;
-  background-color: white;
-}
 
-.content {
+ .content-right {
+   display: inline-block;
+
+   clear: none;
+   margin-right: 8%;
+   margin-left: 2%;
+   width: 40%;
+   height: 60vh;
+   background-color: rgba(255, 255, 255, 0.80);
+
+   .profile-stats {
+     display: block;
+     width: 90%;
+     height: 90%;
+     margin: auto;
+     margin-top: 2.5%;
+
+     .profile-header {
+       display: block;
+       height: auto;
+       width: 100%;
+
+       h1 {
+         display: inline-block;
+         height: auto;
+         width: 100%;
+         font-size: 1.8vw;
+       }
+
+       a {
+         display: inline-block;
+         float: right;
+         clear: none;
+       }
+
+       i.fa-pencil {
+         font-size: 1.5vw;
+         padding-top: 4px;
+       }
+     }
+
+     li {
+       margin: 2rem;
+     }
+
+     h3 {
+       display: inline;
+       font-size: 2vw;
+     }
+
+     p {
+       display: inline;
+       font-size: 2vw;
+       padding-left: 1rem;
+     }
+   }
+
+ }
+
+.content-left {
   display: inline-block;
   float: left;
   clear: none;
-  margin-left: 4.5vw;
-  width: 73vw;
-  height: 77.5vh;
-  background-color: white;
+  // margin-left: 4.5vw;
+  margin-right: 2%;
+  margin-left: 8%;
+  width: 40%;
+  height: 60vh;
+  background-color: rgba(255, 255, 255, 0.80);
 
   .profile-info {
     display: block;
@@ -39,8 +91,8 @@
       h1 {
         display: inline-block;
         height: auto;
-        width: 25%;
-        font-size: 1.5vw;
+        width: 75%;
+        font-size: 1.8vw;
       }
 
       a {
@@ -61,13 +113,18 @@
 
     h3 {
       display: inline;
-      font-size: 1vw;
+      font-size: 2vw;
     }
 
     p {
       display: inline;
-      font-size: 1vw;
+      font-size: 2vw;
       padding-left: 1rem;
     }
   }
+}
+
+.delete-button {
+  text-align: center;
+  margin-top: 20px;
 }
