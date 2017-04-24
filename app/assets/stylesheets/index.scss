@@ -69,24 +69,47 @@ div.panel {
   z-index: 5;
 }
 
+/*TABLE STYLES*/
 table {
   width: 100%;
   height: auto;
   margin-bottom: 20px;
   border-collapse: collapse;
-}
 
-.title {
-  font-size: 1.8em;
-}
+  .title {
+    font-size: 1.8em;
+  }
 
-th, td {
+  th, td {
     padding-top: 10px;
     padding-bottom: 10px;
-}
+  }
 
-tr:nth-child(even) {
-  background-color: #f2f2f2
+  .action {
+    display: block;
+    width: 25%;
+    height: auto;
+    margin: 2% auto;
+
+    i {
+      display: inline-block;
+      width: 15%;
+      padding-right: 0.5rem;
+
+      color: red;
+      &.edit{color: orange;}
+    }
+
+    p {
+      display: inline-block;
+      width: 25%;
+      text-align: left;
+    }
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2
+  }
 }
 
 #add-book {
@@ -139,6 +162,7 @@ tr:nth-child(even) {
   }
 }
 
+
 // Make the submit button float on the right
 .submit-course {
   float: right !important;
@@ -152,7 +176,7 @@ tr:nth-child(even) {
 .switch-btn {
   display: inline-block;
   position: absolute;
-  top: 80px;
+  top: 90px;
   right: 1rem;
   height: 25px;
   width: auto;

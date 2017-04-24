@@ -23,6 +23,15 @@ class DashboardController < ApplicationController
 
     # return courses related to the courses
     @courses = @teacher.courses.all
+    @courses.each {|course|
+      course.books.each {|b|
+        if b.books_for_classes[0].quantity == nil || b.books_for_classes[0].quantity == 0
+          b.quantity = 0
+        else
+          b.quantity = b.books_for_classes[0].quantity
+        end
+      }
+    }
     render :layout => 'index'
   end
 

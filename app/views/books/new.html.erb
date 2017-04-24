@@ -19,6 +19,11 @@
       <label for="isbn"><%= f.label :isbn, "ISBN Number: " %></label>
       <%= f.text_field :isbn %>
 
+      <%= f.fields_for :books_for_classes do |q| %>
+        <%= q.label :quantity %>
+        <%= q.number_field(:quantity, in: 1..200, step: 1) %>
+      <% end %>
+
       <!-- on yes, add additional form fields via AJAX/JQuery -->
       <div class="add-media">
         <h4>Additional Media Required?</h4>
