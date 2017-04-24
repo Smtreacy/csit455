@@ -38,4 +38,9 @@ class AdminController < ApplicationController
     end
   end
 
+  #This is what im testing for email submit
+  def send_email
+    redirect_to"/index/sendEmail"
+  end
+
 end

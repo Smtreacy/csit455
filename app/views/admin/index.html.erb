@@ -16,48 +16,56 @@
       </div></a>
   <% end %>
 
-  <% if @courses.empty? %>
-      <h2 class="no_courses">No Courses yet</h2>
+  <% @courses.each do |course| %>
+      <div id="container" >
+        <button class="dropdown" data-course-id="<%= course.id %>">
+          <%=course.name%>
+          <% if course.submitted %>
+              <i class="fa fa-check"></i> <!--This is the checkmark font. -->
+              <p class="course-submitted">Course submitted!</p>
+          <% else %>
+              <i class="fa fa-check hidden"></i>
+              <p class="course-submitted hidden">Course submitted!</p>
+          <% end %>
+        </button>
+        <div class="panel">
+          <table>
+            <thead>
+            <tr class="top">
+              <th class="title">Title:</th>
+              <th class="title">Author:</th>
+              <th class="title">ISBN:</th>
+              <th class="title">Edition:</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% course.books.each do |book| %>
+                <tr>
+                  <th><%= book.title %></th>
+                  <th><%= book.author %></th>
+                  <th><%= book.isbn %></th>
+                  <th><%= book.edition %></th>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
 
-      <a class="add-button" href="#"><div class="add_course">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-        <h3>Add Course</h3>
-      </div></a>
-<!---- Change this from here --->
-  <% else  %>
-      <!-- needs to be changed to reflect design structure -->
-      <ul class="course_list">
-        <% @courses.each do |course| %>
-            <li class="course_entry">
-              <h2 class="course_name"><%= course.name %></h2>
-              <h2 class="teacher_name"><%= course.teacher.name %></h2>
-              <!-- This is my book order stuff, Need to make it so the right books go into the right slots above -->
-              <!-- @books is in Admin_controller.rb -->
-              <% course.books.each do |book|  %>
-                <li class = "Book Entry">
-                  <h2 class="Book_Name"><%= book.title %></h2>
-                </li>
-                <!-- This is my book order stuff, Need to make it so the right books go into the right slots above -->
-      <%end%>
+        </div>
 
-            </li>
-        <% end %>
-
-
-
-
-
-      </ul>
-<!--- to here for drop down menu. Keep the @Course.each -->
-      <div class="add_course">
-        <a class="add-button" href="#"><i class="fa fa-plus" aria-hidden="true"></i>
-        <h3>Add Course</h3></a>
       </div>
 
+        ><!--- to here for drop down menu. Keep the @Course.each -->
   <% end %>
 
 </div>
 
+      <div class="add_course">
+        <a class="add-button" href="#"><i class="fa fa-plus" aria-hidden="true"></i>
+          <h3>Add Course</h3></a>
+      </div>
+
+
+  </div>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function () {
       $('.ajax-cont').css({'opacity': '0', 'display':'none'});
@@ -93,3 +101,27 @@
       });
   })
 </script>
+
+
+  <script>
+      var acc = document.getElementsByClassName("dropdown");
+      var i;
+      // add accordion animations
+      for (i = 0; i < acc.length; ++i) {
+          acc[i].onclick = function() {
+              this.classList.toggle("active");
+              var panel = this.nextElementSibling;
+              if (panel.style.maxHeight){
+                  panel.style.maxHeight = null;
+              } else {
+                  panel.style.maxHeight = panel.scrollHeight + "px";
+              }
+          }
+      }
+      </script>
+<!-- This is what im testing for Email Submit -->
+<!--<div class ="SubmitBookBtn" >
+<button type="button">Submit Form
+</button>
+</div>
+< -->

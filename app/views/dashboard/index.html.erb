@@ -25,7 +25,7 @@
     <button class="dropdown" data-course-id="<%= course.id %>">
       <%=course.name%>
       <% if course.submitted %>
-        <i class="fa fa-check"></i>
+        <i class="fa fa-check"></i> <!--This is the checkmark font. -->
         <p class="course-submitted">Course submitted!</p>
       <% else %>
         <i class="fa fa-check hidden"></i>
@@ -96,8 +96,8 @@
                     cache: false,
                     success: () => {
                         console.log("Course submitted properly");
-                        $('button[data-course-id="'+c_id+'"] i').toggleClass('hidden');
-                        $('button[data-course-id="'+c_id+'"] p').toggleClass('hidden');
+                        $('button[data-course-id="' + c_id + '"] i').toggleClass('hidden');
+                        $('button[data-course-id="' + c_id + '"] p').toggleClass('hidden');
                     }
                 }
             )
@@ -105,6 +105,7 @@
             return false;
         }
     }
+
 
     /* AJAX JQuery for adding books form */
     function bookAjax(t_id, c_id) {
