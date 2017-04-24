@@ -1,3 +1,58 @@
 // Place all the styles related to the Books controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.book-form.form-cont {
+  height: 480px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.add_book {
+  h4 {
+    margin-left: 17%;
+    margin-bottom: 2px;
+  }
+
+  label {
+    width: 100%;
+    display: block;
+    margin-left: 10%;
+    margin-bottom: 0;
+
+  }
+  input {
+    width: 60%;
+    display: inline;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 0;
+    border: none;
+    border-bottom: 1px solid black;
+    // border-left: 1px solid black;
+    // border-right: 1px solid black;
+    font-size: 15px;
+    outline: none;
+    padding-bottom: 3px;
+  }
+
+  .add-media {
+    .media-check {
+      margin: 0;
+      width: auto;
+      margin-left: 20%;
+      margin-bottom: 12px;
+      // margin-top: 4px;
+    }
+    .media-check-label {
+      display: inline;
+      width: auto;
+      margin-left: 0;
+      margin-bottom: 10px;
+    }
+  }
+  .media-form {
+    background-color: rgb(251, 251, 251);
+  }
+
+}
