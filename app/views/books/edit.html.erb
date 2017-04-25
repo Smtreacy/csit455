@@ -1,0 +1,70 @@
+<div class="overlay">
+  <div class="book-form form-cont">
+    <h1 class="book-head form-head">Edit Book</h1>
+    <p class="exit">X</p>
+
+    <div class="add_book">
+      <%= form_for(@book, url: "/teachers/#{@teacher.id}/courses/#{@book.courses[0].id}/books/#{@book.id}",
+                   html: {method: :patch}) do |f| %>
+          <label for="title"><%= f.label :title, "Name: " %></label>
+          <%= f.text_field :title %>
+
+          <label for="author"><%= f.label :author, "Author: " %></label>
+          <%= f.text_field :author %>
+
+          <label for="edition"><%= f.label :edition, "Edition: " %></label>
+          <%= f.number_field(:edition, in: 1..100, step: 1) %>
+
+          <!-- Definitely will change this somehow to
+                to reflect ISBN numbers -->
+          <label for="isbn"><%= f.label :isbn, "ISBN Number: " %></label>
+          <%= f.text_field :isbn %>
+
+          <%= f.fields_for :books_for_classes do |q| %>
+              <%= q.label :quantity %>
+              <%= q.number_field(:quantity, in: 1..200, step: 1) %>
+          <% end %>
+
+          <!-- on yes, add additional form fields via AJAX/JQuery -->
+          <div class="add-media">
+            <h4>Additional Media Required?</h4>
+            <input class="media-check" type="checkbox">
+            <label class="media-check-label">Yes</label>
+
+            <!-- hidden unless media checkbox is checked-->
+            <div class="media-form">
+              <%= f.fields_for :media do |ff| %>
+                  <label for="media_name"><%= ff.label :name, "Media Name: " %></label>
+                  <%= ff.text_field :name %>
+
+                  <label for="media_author"><%= ff.label :author, "Media Author: " %></label>
+                  <%= ff.text_field :author %>
+
+                  <label for="media_edition"><%= ff.label :edition, "Media Edition: " %></label>
+                  <%= ff.number_field(:edition, in: 1..100, step: 1) %>
+
+                  <label for="media_isbn"><%= ff.label :isbn, "ISBN Number: " %></label>
+                  <%= ff.text_field :isbn %>
+
+                  <div class="website">
+                    <h4>Does this media need website information?</h4>
+                    <input type="checkbox" class="media-check" />
+                    <label class="media-check-label">Yes</label>
+
+                    <!-- hidden unless website box is checked -->
+                    <div class="website-field">
+                      <label for="website"><%= ff.label :website %></label>
+                      <%= ff.text_field :website %>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="add_button">
+            <%= f.submit "Update" %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -54,22 +54,25 @@
               <th><%= book.author %></th>
               <th><%= book.isbn %></th>
               <th><%= book.edition %></th>
-              <!-- this is a hack, not sure how to get it the "rails" way... -->
               <th><%= book.quantity %></th>
               <th>
-                <a href="#"><div class="action">
-                  <i class="fa fa-pencil edit"></i><p>Edit</p>
-                </div></a>
-                <a href="#"><div class="action">
-                  <i class="fa fa-times"></i><p>Delete</p>
-                </div></a>
+                <a class="edit-book" href="#" onclick="bookAjax(<%= course.id %>,<%= book.id %>, 'edit')">
+                  <div class="action">
+                    <i class="fa fa-pencil edit"></i><p>Edit</p>
+                  </div>
+                </a>
+                <a class="del-book" href="#" onclick="confirmDelete(<%= course.id %>, <%= book.id %>)">
+                  <div class="action">
+                    <i class="fa fa-times"></i><p>Delete</p>
+                  </div>
+                </a>
               </th>
             </tr>
           <% end %>
         </tbody>
       </table>
 
-      <a href="#" onclick="bookAjax(<%= @teacher.id %>, <%= course.id %>)" class="add-book">
+      <a href="#" onclick="bookAjax(<%= course.id %>, -1, 'new')" class="add-book">
         <div id="add-book-btn">
           <span class="icon plus"><i class="fa fa-plus"></i></span>
           <p class="btn-text">Add New Book</p>
@@ -120,33 +123,46 @@
         }
     }
 
-
-    /* AJAX JQuery for adding books form */
-    function bookAjax(t_id, c_id) {
-        $.ajax(
-            {
-                url: '/teachers/' + t_id + '/courses/' + c_id + '/books/new',
+    function confirmDelete(c_id, b_id) {
+        if(confirm("Are you sure you'd like to delete this book? This action cannot be undone."))
+            $.ajax({
+                method: 'DELETE',
+                url: '/teachers/<%= @teacher.id %>/courses/'+c_id+'/books/'+b_id,
                 cache: false,
-                success: function (html) {
-                    console.log("Success! T_id: " + t_id + "  C_id: "+c_id);
-                    $('.ajax-cont').html(html).css({"display": "block", "z-index": "100"})
-                        .animate({"opacity": "1"}, {duration: 350, queue: false});
-
-                    /* Add closing animation */
-                    $('p.exit').click(function() {
-                        //hide the container to show login form
-                        $('.ajax-cont').animate({"opacity": "0"}, {duration: 350, complete: () => {
-                            $('.ajax-cont').css({"display": "none", "z-index": "-100"});
-                        }});
-                    });
-                }
-            }
-        );
+                success: function(){location.reload()},
+                fail: ()=>{alert("unable to delete this book, please try again.");}
+            });
+        else
+            alert("unable to delete this book, please try again.");
     }
 
-    $(document).ready(function () {
+    /* AJAX JQuery for adding books form */
+    function bookAjax(c_id, b_id, type) {
+        if(type === 'edit') {
+            type = b_id+'/edit'
+        }
+        $.ajax({
+            url: '/teachers/<%= @teacher.id %>/courses/' + c_id + '/books/'+type,
+            cache: false,
+            success: function (html) {
+                //console.log("Success! T_id: " + t_id + "  C_id: "+c_id);
+                $('.ajax-cont').html(html).css({"display": "block", "z-index": "100"})
+                    .animate({"opacity": "1"}, {duration: 350, queue: false});
+
+                /* Add closing animation */
+                $('p.exit').click(function() {
+                    //hide the container to show login form
+                    $('.ajax-cont').animate({"opacity": "0"}, {duration: 350, complete: () => {
+                        $('.ajax-cont').css({"display": "none", "z-index": "-100"});
+                    }});
+                });
+            }
+        });
+    }
+
+    $(document).ready(()=>{
         $('.ajax-cont').css({'opacity': '0', 'display':'none'});
 
-        $('a.add-book').on("click", (a)=>{a.preventDefault();})
+        $('a.add-book, a.edit-book, a.del-book').on("click", (a)=>{a.preventDefault();})
     });
 </script>

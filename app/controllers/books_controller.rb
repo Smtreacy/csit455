@@ -6,9 +6,6 @@ class BooksController < ApplicationController
     # create a blank media object within the book object
     # this is so we can display the fields for media related to the book
     @book.media.build
-
-    # allows for us to add the quantity, does not yet save any associations
-    # @book.books_for_classes.build
   end
 
   def create
@@ -16,12 +13,6 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
     # Associate the book with the course id passed in the URL
     @book.courses << Course.find(params[:course_id])
-
-    # @book.books_for_classes.destroy_all
-    # @book.books_for_classes << BooksForClass.new(
-    #     {course_id: @book.courses[0].id, book_id: @book.id,
-    #      quantity: params[:book][:books_for_classes][:quantity] })
-    # @book.books_for_classes.collect {|c| c.quantity = params[:quantity]}
 
     @book.books_for_classes[0].quantity = params[:book][:books_for_classes][:quantity]
     # success message, will eventually remove
@@ -46,17 +37,44 @@ class BooksController < ApplicationController
   end
 
   def edit
+    @teacher = Teacher.find_by_email(session[:email])
+    @book = Book.find(params[:id])
+    @book.quantity = @book.books_for_classes[0].quantity
 
+    unless @book.media.exists?
+      @book.media.build
+    end
   end
 
-  def delete
+  def update
+    @book = Book.find(params[:id])
+    if @book.update_attributes(book_params)
+      if params[:book][:books_for_classes][:quantity]!= 0 \
+        && params[:book][:books_for_classes][:quantity] != @book.books_for_classes[0].quantity
+        #this is still not working
+        @book.books_for_classes[0].quantity = params[:book][:books_for_classes][:quantity]
+      end
+      flash[:success] = "Succesfully updated #{@book.title}!"
+    else
+      flash[:fail] = "Unable to update #{@book.title}: #{@book.errors.pretty_print_inspect}"
+    end
+    redirect_to('/index')
+  end
 
+  def destroy
+    book = Book.find(params[:id])
+    if book.destroy
+      flash[:success] = "#{book.title} successfully deleted"
+    else
+      flash[:fail] = "Unable to delete #{book.title}, try again"
+    end
+    redirect_back('/')
   end
 
   private
     def book_params
-      params.require(:book).permit(:title, :author, :edition, :isbn,
-         #books_for_classes_attributes: [:quantity],
-         media_attributes: [:name, :author, :edition, :isbn, :website])
+      params.require(:book).permit(
+        :title, :author, :edition, :isbn, media_attributes: [:name, :author, :edition, :isbn, :website]
+      )
     end
 end
