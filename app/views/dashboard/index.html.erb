@@ -153,7 +153,7 @@
                 method: 'DELETE',
                 url: '/teachers/<%= @teacher.id %>/courses/'+c_id+'/books/'+b_id,
                 cache: false,
-                success: function(){location.reload()},
+                success: function(){location.reload(true)},
                 fail: ()=>{alert("unable to delete this book, please try again.");}
             });
         else
@@ -190,19 +190,18 @@
         $('a.add-book, a.edit-book, a.del-book, .m-drop').on("click", (a)=>{a.preventDefault();});
 
         /*MEDIA ACCORDION*/
-        $('.m-drop').each((obj)=>{
+        $('.m-drop').each(()=>{
           $(this).on("click", ()=>{
-              $(this).toggleClass('.active');
-
               if($(this).hasClass('active')) {
                   console.log($(this).parent().next());
-                  $(this).parent().next().css({"display": "block"});
-                  $(this).parent().next().next().css({"display":"block"})
+                  $(this).parent().parent().next().css({"display": "block"});
+                  $(this).parent().parent().next().next().css({"display":"block"});
+                  $()
               }
               else {
-                  console.log($(this).parent().next().object);
-                  $(this).parent().next().css({"display": "none"});
-                  $(this).parent().next().next().css({"display": "none"});
+                  console.log($(this).parent().parent().next());
+                  $(this).parent().parent().next().css({"display": "none"});
+                  $(this).parent().parent().next().next().css({"display": "none"});
               }
           })
         });

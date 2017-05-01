@@ -16,7 +16,7 @@
 
       <%= f.label :teacher_id, "Teacher: " %>
       <%= f.select(:teacher_id) do %>
-        <% @teachers.each do |teacher| %>
+        <% @teachers.where(department: @user.department).each do |teacher| %>
               <%= content_tag(:option, teacher.name, value: teacher.id) %>
           <% end %>
       <% end %>

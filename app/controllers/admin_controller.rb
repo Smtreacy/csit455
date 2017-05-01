@@ -7,7 +7,7 @@ class AdminController < ApplicationController
     # if teacher is an admin, give ability to
     # see and change ALL courses, books, etc..
     if @teacher.admin && session[:admin]
-      @courses = Course.all
+      @courses = Course.where(deptName: @teacher.department)
     else
       flash[:fail] = "You do not have admin privliges!"
       redirect_to '/index'
