@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403132128) do
+ActiveRecord::Schema.define(version: 20170501134008) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -33,12 +33,14 @@ ActiveRecord::Schema.define(version: 20170403132128) do
 
   create_table "courses", force: :cascade do |t|
     t.integer  "teacher_id"
-    t.string   "deptName",   limit: 7
+    t.string   "deptName",      limit: 7
     t.text     "name"
     t.integer  "section"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.boolean  "submitted"
+    t.integer  "course_number"
+    t.boolean  "finalized"
     t.index ["teacher_id"], name: "index_courses_on_teacher_id"
   end
 

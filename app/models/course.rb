@@ -5,5 +5,5 @@ class Course < ApplicationRecord
   has_many :books, through: :books_for_classes
 
   # validate information
-  validates :name, :section, :teacher_id, :deptName, presence: :true
+  validates :name, :section, :teacher_id, :deptName, :course_number, presence: :true
 end

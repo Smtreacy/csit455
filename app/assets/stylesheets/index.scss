@@ -47,7 +47,6 @@ div#container {
 
 .dropdown.active:after {
   content: "▲";
-
 }
 
 div.panel {
@@ -76,13 +75,46 @@ table {
   margin-bottom: 20px;
   border-collapse: collapse;
 
-  .title {
-    font-size: 1.8em;
-  }
+  .title {font-size: 1.8em;}
 
   th, td {
     padding-top: 10px;
     padding-bottom: 10px;
+  }
+
+  thead {
+    th {font-weight: bold !important;}
+  }
+
+  tr th {font-weight: normal;}
+  .media-title-row th {font-weight: bold !important;}
+
+  .m-down {
+    display: block;
+    position: relative;
+    bottom: 3.6rem;
+    right: 3rem;
+    font-size: 1.5em;
+  }
+
+  .m-down:after {
+    content: '▼';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    text-align: center;
+  }
+
+  .m-down.active:after {
+    content: "▲";
+  }
+  
+  .media{
+    display: none;
+  }
+
+  .media-title-row, .media-row {
+    display: none;
   }
 
   .action {

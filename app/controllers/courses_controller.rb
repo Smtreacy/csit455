@@ -62,6 +62,6 @@ class CoursesController < ApplicationController
 
   # helper function for validating parameters passed by course form
   def course_params
-    params.require(:course).permit(:teacher_id, :name, :deptName, :section, :submitted)
+    params.require(:course).permit(:teacher_id, :course_number, :name, :deptName, :section, :submitted)
   end
 end

@@ -5,6 +5,9 @@
 
     <%= form_for(@course, url: teachers_courses_path, html: {method: :post}) \
           do |f| %>
+      <%= f.label :course_number, "Course Number: "%>
+      <%= f.text_field :course_number%>
+
       <%= f.label :name, "Name: " %>
       <%= f.text_field :name %>
 

@@ -66,8 +66,31 @@
                     <i class="fa fa-times"></i><p>Delete</p>
                   </div>
                 </a>
+                <% if book.media.exists? %>
+                    <a href="#" class="m-drop"><div class="m-down"></div></a>
+                <% end %>
               </th>
             </tr>
+            <% if book.media.exists? %>
+              <div class="media">
+                <tr class="media-title-row">
+                  <th></th>
+                  <th class="m-title">Media Title:</th>
+                  <th class="m-title">Media Author:</th>
+                  <th class="m-title">Media Edition:</th>
+                  <th class="m-ttle">Media ISBN:</th>
+                  <th class="m-title">Media Website:</th>
+                </tr>
+                <tr class="media-row">
+                  <th></th>
+                  <th><%= book.media[0].name %></th>
+                  <th><%= book.media[0].author %></th>
+                  <th><%= book.media[0].edition %></th>
+                  <th><%= book.media[0].isbn %></th>
+                  <th><%= book.media[0].website %></th>
+                </tr>
+              </div>
+            <% end %>
           <% end %>
         </tbody>
       </table>
@@ -94,16 +117,17 @@
     var i;
     // add accordion animations
     for (i = 0; i < acc.length; ++i) {
-        acc[i].onclick = function() {
+        acc[i].onclick = function () {
             this.classList.toggle("active");
             var panel = this.nextElementSibling;
-            if (panel.style.maxHeight){
+            if (panel.style.maxHeight) {
                 panel.style.maxHeight = null;
             } else {
                 panel.style.maxHeight = panel.scrollHeight + "px";
             }
         }
     }
+
     <!-- script for confirming prof wants to submit to Admin -->
     function clicked(CName, t_id, c_id) {
         if (confirm('Are you sure you wish to submit this booklist for ' + CName + ' ?')) {
@@ -163,6 +187,24 @@
     $(document).ready(()=>{
         $('.ajax-cont').css({'opacity': '0', 'display':'none'});
 
-        $('a.add-book, a.edit-book, a.del-book').on("click", (a)=>{a.preventDefault();})
+        $('a.add-book, a.edit-book, a.del-book, .m-drop').on("click", (a)=>{a.preventDefault();});
+
+        /*MEDIA ACCORDION*/
+        $('.m-drop').each((obj)=>{
+          $(this).on("click", ()=>{
+              $(this).toggleClass('.active');
+
+              if($(this).hasClass('active')) {
+                  console.log($(this).parent().next());
+                  $(this).parent().next().css({"display": "block"});
+                  $(this).parent().next().next().css({"display":"block"})
+              }
+              else {
+                  console.log($(this).parent().next().object);
+                  $(this).parent().next().css({"display": "none"});
+                  $(this).parent().next().next().css({"display": "none"});
+              }
+          })
+        });
     });
 </script>
