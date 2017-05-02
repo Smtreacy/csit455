@@ -44,9 +44,80 @@
               <p class="course-submitted hidden">Course submitted!</p>
           <% end %>
         </button>
-      </div>
+        <div class="panel">
+          <div class="course-overlay"
+            style="display:<%= course.submitted ? 'block' : 'none'%>"></div> <!-- gray out the information until user unsubmitts course -->
 
-        ><!--- to here for drop down menu. Keep the @Course.each -->
+          <table>
+            <thead>
+              <tr class="top">
+                <th class="title">Title:</th>
+                <th class="title">Author:</th>
+                <th class="title">ISBN:</th>
+                <th class="title">Edition:</th>
+                <th class="title">Quantity:</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% course.books.each do |book| %>
+                <tr>
+                  <th><%= book.title %></th>
+                  <th><%= book.author %></th>
+                  <th><%= book.isbn %></th>
+                  <th><%= book.edition %></th>
+                  <th><%= book.quantity %></th>
+                  <th>
+
+                    <% if book.media.exists? %>
+                        <a href="#" class="m-drop"><div class="m-down"></div></a>
+                    <% end %>
+                  </th>
+                </tr>
+                <% if book.media.exists? %>
+                  <div class="media">
+                    <tr class="media-title-row">
+                      <th></th>
+                      <th class="m-title">Media Title:</th>
+                      <th class="m-title">Media Author:</th>
+                      <th class="m-title">Media Edition:</th>
+                      <th class="m-ttle">Media ISBN:</th>
+                      <th class="m-title">Media Website:</th>
+                    </tr>
+                    <tr class="media-row">
+                      <th></th>
+                      <th><%= book.media[0].name %></th>
+                      <th><%= book.media[0].author %></th>
+                      <th><%= book.media[0].edition %></th>
+                      <th><%= book.media[0].isbn %></th>
+                      <th><%= book.media[0].website %></th>
+                    </tr>
+                  </div>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+
+          <!--  button for deleting class-->
+          <a href="#" onclick="confirmDelete(<%= course.id %>)" class="add-book">
+            <div id="add-book-btn">
+              <span class="icon plus"><i class="fa fa-plus"></i></span>
+              <p class="btn-text">Delete Class</p>
+            </div>
+          </a>
+
+          <!-- button for editing class -->
+          <!--  not done yet -->
+          <a href="#" class="edit-class" onclick="classAjax(<%= course.id %>,'edit')">
+            <div id="add-book-btn" class="submit-course"
+                 onclick="clicked('<%=course.name%>', <%= @teacher.id %>, <%= course.id %>);">
+              <span class="icon check"><i class="fa fa-check"></i></span>
+              <p class="btn-text">Edit Class</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+      <!--- to here for drop down menu. Keep the @Course.each -->
   <% end %>
 </div>
 
@@ -77,6 +148,8 @@
       });
   });
 
+  
+
   $(document).ajaxComplete(function() {
       $('p.exit').on("click", function () {
           //hide the container to show login form
@@ -92,6 +165,42 @@
       });
   });
 
+  function classAjax(c_id, type) {
+      if(type === 'edit') {
+          type = c_id+'/edit'
+      }
+      $.ajax({
+          //url: '/teachers/<%= @teacher.id %>/courses/' + c_id + '/books/'+type,
+          ///teachers/:teacher_id/courses/:id/edit
+          url: '/teachers/<%= @teacher.id %>/courses/' + c_id + type,
+          cache: false,
+          success: function (html) {
+              //console.log("Success! T_id: " + t_id + "  C_id: "+c_id);
+              $('.ajax-cont').html(html).css({"display": "block", "z-index": "100"})
+                  .animate({"opacity": "1"}, {duration: 350, queue: false});
+
+              /* Add closing animation */
+              $('p.exit').click(function() {
+                  //hide the container to show login form
+                  $('.ajax-cont').animate({"opacity": "0"}, {duration: 350, complete: () => {
+                      $('.ajax-cont').css({"display": "none", "z-index": "-100"});
+                  }});
+              });
+          }
+      });
+  }
+
+  function confirmDelete(c_id) {
+      if(confirm("Are you sure you'd like to delete this book? This action cannot be undone."))
+          $.ajax({
+              method: 'DELETE',
+              url: '/admin/<%= @teacher.id %>/courses/'+c_id,
+              cache: false,
+              success: function(){location.reload(true)},
+              fail: ()=>{alert("unable to delete this book, please try again.");}
+          });
+  }
+
   var acc = document.getElementsByClassName("dropdown");
   var i;
   // add accordion animations
@@ -99,12 +208,16 @@
       acc[i].onclick = function () {
           this.classList.toggle("active");
           var panel = this.nextElementSibling;
+          panelHeight = panel.scrollHeight;
           if (panel.style.maxHeight) {
               panel.style.maxHeight = null;
+                $(this).parent().css("maxHeight", "-="+panel.scrollHeight+"px");
           } else {
               panel.style.maxHeight = panel.scrollHeight + "px";
+              $(this).parent().css("maxHeight", "+="+panel.scrollHeight+"px");
           }
       }
   }
-</script>
 
+
+</script>

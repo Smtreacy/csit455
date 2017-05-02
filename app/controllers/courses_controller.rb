@@ -71,6 +71,30 @@ class CoursesController < ApplicationController
     end
   end
 
+  def destroy
+    @course = Course.find(ids params[:id])
+    if course.destroy
+      flash[:success] = "#{course.title},try again"
+    else
+      flash[:fail] = "Unable to delete #{course.title}, try again"
+    end
+    redirect_back(fallback_location '/')
+  end
+
+  def edit
+    @teacher = Teacher.find_by_email(session[:email])
+    @course = Course.find(params[:id])
+  end
+
+  def update
+    @course = Course.find(params[:id])
+    if @course.update_attributes(course_params)
+      flash[:sucess] = "Succesfully updated #{@course.title}"
+    else
+      flash[:fail] = "Unable to update #{@course.title}"
+    end
+  end
+
   private
 
   # helper function for validating parameters passed by course form

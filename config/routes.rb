@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     get 'logout', on: :member
     get 'admin/addcourse' => 'admin#add_course'
 
-    resources :courses, only: [:new, :edit, :update, :delete] do
+    resources :courses, only: [:new, :edit, :update, :destroy] do
       resources :books
       get 'submit', on: :member
     end
