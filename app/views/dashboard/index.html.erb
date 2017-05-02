@@ -9,9 +9,10 @@
 
 <!-- Gives the ability to send back information to the user from controller -->
 <% flash.each do |message_type, message| %>
-    <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <div class="alert alert-<%= message_type %>"><p class="alert-txt"><%= message %></p></div>
 <% end %>
-
+<!--<div class="alert alert-fail"><p class="alert-txt">Unable to process book.</p></div>-->
+<!-- If user is an admin, show the toggle-view button -->
 <% if @teacher.admin %>
     <a href="/admin/toggle"><div class="switch-btn">
       <p class="switch-txt">
@@ -23,7 +24,12 @@
 <% @courses.each do |course| %>
   <div id="container" >
     <button class="dropdown" data-course-id="<%= course.id %>">
-      <%=course.name%>
+      <p class="course-num">
+        <% unless course.course_number.nil? %><%="#{course.deptName} #{course.course_number}"%><%end%>
+      </p>
+      <p class="course-name">
+        <%=course.name%>
+      </p>
       <% if course.submitted %>
         <i class="fa fa-check"></i> <!--This is the checkmark font. -->
         <p class="course-submitted">Course submitted!</p>
@@ -120,10 +126,13 @@
         acc[i].onclick = function () {
             this.classList.toggle("active");
             var panel = this.nextElementSibling;
+            panelHeight = panel.scrollHeight;
             if (panel.style.maxHeight) {
                 panel.style.maxHeight = null;
+                $(this).parent().css("maxHeight", "-="+panel.scrollHeight+"px");
             } else {
                 panel.style.maxHeight = panel.scrollHeight + "px";
+                $(this).parent().css("maxHeight", "+="+panel.scrollHeight+"px");
             }
         }
     }
@@ -156,8 +165,6 @@
                 success: function(){location.reload(true)},
                 fail: ()=>{alert("unable to delete this book, please try again.");}
             });
-        else
-            alert("unable to delete this book, please try again.");
     }
 
     /* AJAX JQuery for adding books form */

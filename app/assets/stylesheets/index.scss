@@ -3,8 +3,9 @@
 //ST:Need this so that way the dropdown menu is centered
 //ST:removed width 80% to git it a fuller look
 div#container {
-  margin: auto;
   text-align: center;
+  max-height: 20vh;
+  margin: 2rem auto;
 }
 div#search {
   margin-right: 80%;
@@ -49,16 +50,36 @@ input#searchBtn:hover{
   background: #f63049;
 }
 
-.dropdown {
+button.dropdown {
   background-color: #eee;
   color: #444;
   cursor: pointer;
   width: 80%;
   height: .1%;
+  min-height: 7.5vh;
   padding: 18px;
   margin-top: .5%;
-  font-size: 25px;
   transition: 0.4s;
+
+  .course-name {
+    display: inline-block;
+    position: relative;
+    left: -1rem;
+    width: 75%;
+
+    font-size: 25px;
+  }
+
+  .course-num {
+    display: inline-block;
+    float: left;
+    clear: none;
+    width: 6.75%;
+    margin-top: 0.1rem;
+    margin-left: 1rem;
+
+    font-size: 25px;
+  }
 
   .fa-check, .course-submitted {
     padding-left: 8px;
@@ -85,10 +106,12 @@ input#searchBtn:hover{
   font-weight: bold;
   float: right;
   text-align: center;
+  font-size: 25px;
 }
 
 .dropdown.active:after {
   content: "▲";
+  font-size: 25px;
 }
 
 div.panel {
@@ -245,37 +268,4 @@ table {
     left: 0 !important;
     right: 20%;
   }
-}
-
-.switch-btn {
-  display: inline-block;
-  position: absolute;
-  top: 90px;
-  right: 1rem;
-  height: 25px;
-  width: auto;
-
-  padding: 4px 16px;
-  @include border-radius(20px);
-  background-color: gold;
-  @include box-shadow(0 3px darken(gold, 7.5));
-
-  &:hover {
-    -webkit-transform: translateY(2px);
-    -moz-transform: translateY(2px);
-    -ms-transform: translateY(2px);
-    -o-transform: translateY(2px);
-    transform: translateY(2px);
-
-    @include box-shadow(0 1.5px darken(#ffb347, 20));
-  }
-
-  .switch-txt {
-    text-transform: uppercase;
-    font-weight: bold;
-    padding-top: 4px;
-    color: white;
-  }
-
-
 }

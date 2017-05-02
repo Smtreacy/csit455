@@ -30,7 +30,12 @@
   <% @courses.each do |course| %>
       <div id="container" >
         <button class="dropdown" data-course-id="<%= course.id %>">
-          <%=course.name%>
+          <p class="course-num">
+            <% unless course.course_number.nil? %><%="#{course.deptName} #{course.course_number}"%><%end%>
+          </p>
+          <p class="course-name">
+            <%=course.name%>
+          </p>
           <% if course.submitted %>
               <i class="fa fa-check"></i> <!--This is the checkmark font. -->
               <p class="course-submitted">Course submitted!</p>
@@ -39,30 +44,6 @@
               <p class="course-submitted hidden">Course submitted!</p>
           <% end %>
         </button>
-        <div class="panel">
-          <table>
-            <thead>
-            <tr class="top">
-              <th class="title">Title:</th>
-              <th class="title">Author:</th>
-              <th class="title">ISBN:</th>
-              <th class="title">Edition:</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% course.books.each do |book| %>
-                <tr>
-                  <th><%= book.title %></th>
-                  <th><%= book.author %></th>
-                  <th><%= book.isbn %></th>
-                  <th><%= book.edition %></th>
-                </tr>
-            <% end %>
-            </tbody>
-          </table>
-
-        </div>
-
       </div>
 
         ><!--- to here for drop down menu. Keep the @Course.each -->
@@ -70,14 +51,7 @@
 
 </div>
 
-      <div class="add_course">
-        <a class="add-button" href="#"><i class="fa fa-plus" aria-hidden="true"></i>
-          <h3>Add Course</h3></a>
-      </div>
 
-
-
-  </div>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function () {
       $('.ajax-cont').css({'opacity': '0', 'display':'none'});
@@ -111,24 +85,21 @@
               $('.ajax-cont').animate({"opacity": "1"}, {duration: 350});
           })
       });
-  })
-</script>
+  });
 
-
-  <script>
-      var acc = document.getElementsByClassName("dropdown");
-      var i;
-      // add accordion animations
-      for (i = 0; i < acc.length; ++i) {
-          acc[i].onclick = function() {
-              this.classList.toggle("active");
-              var panel = this.nextElementSibling;
-              if (panel.style.maxHeight){
-                  panel.style.maxHeight = null;
-              } else {
-                  panel.style.maxHeight = panel.scrollHeight + "px";
-              }
+  var acc = document.getElementsByClassName("dropdown");
+  var i;
+  // add accordion animations
+  for (i = 0; i < acc.length; ++i) {
+      acc[i].onclick = function () {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+          } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
           }
       }
-      </script>
+  }
+</script>
 

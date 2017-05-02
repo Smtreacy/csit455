@@ -28,7 +28,7 @@ class BooksController < ApplicationController
     else
       if @book.invalid?
         flash[:fail] = "Unable to create book: #{@book.errors.full_messages}"
-        raise "error"
+         raise "error"
       else
         flash[:fail] = "Unable to create course for unknown reason. Try again!"
       end

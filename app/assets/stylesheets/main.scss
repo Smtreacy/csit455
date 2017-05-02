@@ -112,12 +112,22 @@ form {
 // alert message stlyes
 .alert {
   display: block;
+  position: relative;
+  top: -3.8rem;
   width: 100%;
   height: auto;
-  font-size: 0.8vw;
-  margin-bottom: 2%;
+  min-height: 50px;
+  font-size: 1.1vw;
+  //margin-bottom: 5.5rem;
+  background-color: rgba(0,0,0,0.3);
+
+  .alert-txt {
+    padding-top: 0.5%;
+    font-size: 1.1vw;
+    padding-left: 1rem;
+  }
 }
 
 .alert-success { color: green; }
-.alert-fail { color: lighten(red, 20%); }
+.alert-fail { color: lighten(red, 5%); }
 

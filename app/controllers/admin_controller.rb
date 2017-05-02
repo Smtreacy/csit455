@@ -3,7 +3,6 @@ class AdminController < ApplicationController
 
   def index
     @teacher = Teacher.find_by_email(session[:email])
-    @books = Book.all #Use this to get books for Admin in admin/Index.html.erb
     # if teacher is an admin, give ability to
     # see and change ALL courses, books, etc..
     if @teacher.admin && session[:admin]
