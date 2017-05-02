@@ -5,8 +5,8 @@ class CoursesController < ApplicationController
   # form view for adding new courses
   def new
     @course = Course.new
-    @teachers = Teacher.all
-
+    @user = Teacher.find_by_email(session[:email])
+    @teachers = Teacher.where(department: @user.department)
   end
 
   #This should get all the courses that match the search query
