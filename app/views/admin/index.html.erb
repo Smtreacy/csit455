@@ -2,7 +2,15 @@
 <div class="large-header">
   <h2>Welcome <%= @teacher.name %>!</h2>
   <p>Add courses for the next semester below, or use the button to the right to see your own courses!</p>
+
+
+
+  <%= form_tag(search_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Courses" %>
+      <%= submit_tag "Search", :name => nil %>
+  <% end %>
 </div>
+
 
 <div class="admin-cont">
 
@@ -68,6 +76,7 @@
       </div>
 
 
+
   </div>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function () {
@@ -122,9 +131,4 @@
           }
       }
       </script>
-<!-- This is what im testing for Email Submit -->
-<!--<div class ="SubmitBookBtn" >
-<button type="button">Submit Form
-</button>
-</div>
-< -->
+

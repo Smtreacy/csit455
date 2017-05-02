@@ -1,0 +1,31 @@
+<% @course.each do |course| %>
+        <p>Course Name: <%=course.name%> </p><br>
+        <p>Books:</p>
+
+      <div class="panel">
+        <table>
+          <thead>
+          <tr class="top">
+            <th class="title">Title:</th>
+            <th class="title">Author:</th>
+            <th class="title">ISBN:</th>
+            <th class="title">Edition:</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% course.books.each do |book| %>
+              <tr>
+                <th><%= book.title %></th>
+                <th><%= book.author %></th>
+                <th><%= book.isbn %></th>
+                <th><%= book.edition %></th>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+      </div>
+
+
+<% end %>
+

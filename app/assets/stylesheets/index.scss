@@ -6,6 +6,48 @@ div#container {
   margin: auto;
   text-align: center;
 }
+div#search {
+  margin-right: 80%;
+  margin-top: 1%;
+  //MAKE SURE TO DO RailsDb:Migrate
+}
+input#searchBar {
+  border: 1px solid #000000;
+  border-right:none;
+  font-size: 16px;
+  padding:10px;
+  outline:none;
+  width:250px;
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+input#searchBtn{
+  border: 1px solid #000000;
+  font-size: 16px;
+  padding:10px;
+  background:#D3D3D3;
+  font-weight: bold;
+  cursor: pointer;
+  outline:none;
+  -webkit-border-top-right-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  -moz-border-radius-bottomright: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+
+
+
+}
+input#searchBtn:hover{
+  background: #f63049;
+}
 
 .dropdown {
   background-color: #eee;
@@ -234,4 +276,6 @@ table {
     padding-top: 4px;
     color: white;
   }
+
+
 }

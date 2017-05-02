@@ -19,8 +19,10 @@ Rails.application.routes.draw do
   get '/admin/index' => 'admin#index'
   get '/admin/toggle' => 'admin#toggle'
   get '/index/sendEmail' => 'index#send_email'
+  get '/search' => 'courses#search'
   # custom post for form (avoid collision of :teacher_id)
   post '/teachers/courses' => 'courses#create'
+  post '/search' => 'courses#search'
 
   # set form submit to login controller
   post '/', to: 'dashboard#login'

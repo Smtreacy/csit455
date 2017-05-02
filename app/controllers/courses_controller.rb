@@ -9,6 +9,19 @@ class CoursesController < ApplicationController
 
   end
 
+  #This should get all the courses that match the search query
+  def search
+     query = "%" + params[:search] + "%"
+     @course = Course.where("name LIKE ?", query)
+    # if params[:search]
+    #   @course = Course.where(params:[:search]).order("created_at DESC")
+    #  else
+    #   @course = Course.all.order("created_at DESC")
+    #This was causing an error with the search
+    #@courses = Course.all;
+    #end
+    end
+
   # save changes to database
   def create
     # find if there are any courses with both the same name and section number
@@ -64,4 +77,6 @@ class CoursesController < ApplicationController
   def course_params
     params.require(:course).permit(:teacher_id, :course_number, :name, :deptName, :section, :submitted)
   end
+
+
 end

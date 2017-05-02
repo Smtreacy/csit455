@@ -6,4 +6,5 @@ class Course < ApplicationRecord
 
   # validate information
   validates :name, :section, :teacher_id, :deptName, :course_number, presence: :true
+
 end
