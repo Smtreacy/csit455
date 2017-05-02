@@ -1,0 +1,117 @@
+<div class="ajax-cont"></div> <!-- AJAX Destination -->
+<div class="large-header">
+
+
+
+
+  <%= form_tag(search_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Courses" %>
+      <%= submit_tag "Search", :name => nil %>
+  <% end %>
+</div>
+
+
+<div class="admin-cont">
+
+  <!-- Gives the ability to send back information to the user from controller -->
+  <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
+
+
+
+  <% @course.each do |course| %>
+      <div id="container" >
+        <button class="dropdown" data-course-id="<%= course.id %>">
+          <%=course.name%>
+          <% if course.submitted %>
+              <i class="fa fa-check"></i> <!--This is the checkmark font. -->
+              <p class="course-submitted">Course submitted!</p>
+          <% else %>
+              <i class="fa fa-check hidden"></i>
+              <p class="course-submitted hidden">Course submitted!</p>
+          <% end %>
+        </button>
+        <div class="panel">
+          <table>
+            <thead>
+            <tr class="top">
+              <th class="title">Title:</th>
+              <th class="title">Author:</th>
+              <th class="title">ISBN:</th>
+              <th class="title">Edition:</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% course.books.each do |book| %>
+                <tr>
+                  <th><%= book.title %></th>
+                  <th><%= book.author %></th>
+                  <th><%= book.isbn %></th>
+                  <th><%= book.edition %></th>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+
+      ><!--- to here for drop down menu. Keep the @Course.each -->
+  <% end %>
+
+</div>
+
+<div class="add_course">
+  <a class="add-button" href="#"><i class="fa fa-plus" aria-hidden="true"></i>
+    <h3>Add Course</h3></a>
+</div>
+
+
+
+</div>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('.ajax-cont').css({'opacity': '0', 'display':'none'});
+
+        $('.add-button').on("click", function (a) {
+            a.preventDefault();
+
+        });
+    });
+
+    $(document).ajaxComplete(function() {
+        $('p.exit').on("click", function () {
+            //hide the container to show login form
+            $('.ajax-cont').animate({"opacity": "0"}, {duration: 350, complete: function() {
+                $('.ajax-cont').css({"display": "none", "z-index": "-100"});
+            }});
+            //remove previous event listener on the ajax call, add a new one to just show the container
+            $('.add-button').off("click").on("click", function (a) {
+                a.preventDefault();  //prevent ajax call from happening again
+                $('.ajax-cont').css({"z-index": "100", "display": "block"});
+                $('.ajax-cont').animate({"opacity": "1"}, {duration: 350});
+            })
+        });
+    })
+</script>
+
+
+<script>
+    var acc = document.getElementsByClassName("dropdown");
+    var i;
+    // add accordion animations
+    for (i = 0; i < acc.length; ++i) {
+        acc[i].onclick = function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight){
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
+    }
+</script>
+

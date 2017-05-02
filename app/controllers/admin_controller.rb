@@ -13,6 +13,13 @@ class AdminController < ApplicationController
     end
   end
 
+  def search
+    query = "%" + params[:search] + "%"
+    @course = Course.where("name LIKE ?", query)
+    @teacher = Teacher.find_by_email(session[:email])
+
+  end
+
   def add_course
     # check to ensure teacher is an admin
     # prevent users from changing the id in the url
