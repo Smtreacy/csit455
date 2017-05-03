@@ -90,9 +90,9 @@ class CoursesController < ApplicationController
   def update
     @course = Course.find(params[:id])
     if @course.update_attributes(course_params)
-      flash[:sucess] = "Succesfully updated #{@course.title}"
+      flash[:sucess] = "Succesfully updated #{@course.name}"
     else
-      flash[:fail] = "Unable to update #{@course.title}"
+      flash[:fail] = "Unable to update #{@course.name}"
     end
   end
 

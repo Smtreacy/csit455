@@ -130,25 +130,39 @@
 
   $(document).ready(function () {
       $('.ajax-cont').css({'opacity': '0', 'display':'none'});
-      $('a.add-book, a.edit-book, a.del-book, a.edit-class').on("click", (a)=>{a.preventDefault();});
+      $('a.add-book, a.edit-book, a.del-book, a.edit-class, a.add-button').on("click", (a)=>{a.preventDefault();});
+
+      $('.add-button').on("click", function (a) {
+          a.preventDefault();
+          $.ajax(
+              {
+                  url: '<%= new_teacher_course_url(@teacher) %>',
+                  cache: false,
+                  success: function (html) {
+                      $('.ajax-cont').append(html).css({"display": "block"})
+                          .animate({"opacity": "1"}, {duration: 350, queue: false});
+                  }
+              }
+          )
+      });
   });
 
   
 
-//  $(document).ajaxComplete(function() {
-//      $('p.exit').on("click", function () {
-//          //hide the container to show login form
-//          $('.ajax-cont').animate({"opacity": "0"}, {duration: 350, complete: function() {
-//              $('.ajax-cont').css({"display": "none", "z-index": "-100"});
-//          }});
-//          //remove previous event listener on the ajax call, add a new one to just show the container
-//          $('.add-button').off("click").on("click", function (a) {
-//              a.preventDefault();  //prevent ajax call from happening again
-//              $('.ajax-cont').css({"z-index": "100", "display": "block"});
-//              $('.ajax-cont').animate({"opacity": "1"}, {duration: 350});
-//          })
-//      });
-//  });
+  $(document).ajaxComplete(function() {
+      $('p.exit').on("click", function () {
+          //hide the container to show login form
+          $('.ajax-cont').animate({"opacity": "0"}, {duration: 350, complete: function() {
+              $('.ajax-cont').css({"display": "none", "z-index": "-100"});
+          }});
+          //remove previous event listener on the ajax call, add a new one to just show the container
+          $('.add-button').off("click").on("click", function (a) {
+              a.preventDefault();  //prevent ajax call from happening again
+              $('.ajax-cont').css({"z-index": "100", "display": "block"});
+              $('.ajax-cont').animate({"opacity": "1"}, {duration: 350});
+          })
+      });
+  });
 
   function classAjax(c_id, type) {
       if(type === 'edit') {
