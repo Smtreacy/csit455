@@ -2,15 +2,13 @@
 <div class="large-header">
   <h2>Welcome <%= @teacher.name %>!</h2>
   <p>Add courses for the next semester below, or use the button to the right to see your own courses!</p>
-
-
-
+</div>
+<div id = "form_Info" >
   <%= form_tag(search_path, :method => "get", id: "search-form") do %>
       <%= text_field_tag :search, params[:search], placeholder: "Search Courses" %>
       <%= submit_tag "Search", :name => nil %>
   <% end %>
 </div>
-
 
 <div class="admin-cont">
 

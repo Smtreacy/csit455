@@ -1,9 +1,7 @@
-<p>Search Results for '<%=params[:search]%>'</p>
-
-<% if (@course.empty?) %>
-    <P>No Results found, Try Again</P>
-<% end %>
-
 <%= render partial: 'search',
     collection: @course
     %>
+
+<% if (@course.empty?) %>
+    <P>No Results found for '<%=params[:search]%>', Try Again</P>
+<% end %>

@@ -1,15 +1,17 @@
 <div class="ajax-cont"></div> <!-- AJAX Destination -->
 <div class="large-header">
-
-
-
-
+  <h2>Welcome <%= @teacher.name %>!</h2>
+  <p>Add courses for the next semester below, or use the button to the right to see your own courses!</p>
+  <h2>Search Results for '<%=params[:search]%>'</h2>
+</div>
+<div id ="form_Info">
   <%= form_tag(search_path, :method => "get", id: "search-form") do %>
       <%= text_field_tag :search, params[:search], placeholder: "Search Courses" %>
       <%= submit_tag "Search", :name => nil %>
-  <% end %>
-</div>
+      <a href="/admin/index"><button type="button">Go Back</button></a>
 
+<% end %>
+</div>
 
 <div class="admin-cont">
 
@@ -62,12 +64,6 @@
   <% end %>
 
 </div>
-
-<div class="add_course">
-  <a class="add-button" href="#"><i class="fa fa-plus" aria-hidden="true"></i>
-    <h3>Add Course</h3></a>
-</div>
-
 
 
 </div>
