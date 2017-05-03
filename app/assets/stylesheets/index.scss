@@ -154,6 +154,11 @@ table {
   tr th {font-weight: normal;}
   .media-title-row th {font-weight: bold !important;}
 
+  .m-drop {
+    display: inline;
+    z-index: 100;
+  }
+
   .m-down {
     display: block;
     position: relative;
@@ -162,24 +167,16 @@ table {
     font-size: 1.5em;
   }
 
-  .m-down:after {
-    content: '▼';
-    color: #777;
-    font-weight: bold;
-    float: right;
-    text-align: center;
-  }
+  //.m-down:after {
+  //  content: '▼';
+  //  color: #777;
+  //  font-weight: bold;
+  //  float: right;
+  //  text-align: center;
+  //}
 
   .m-down.active:after {
     content: "▲";
-  }
-  
-  .media{
-    display: none;
-  }
-
-  .media-title-row, .media-row {
-    display: none;
   }
 
   .action {

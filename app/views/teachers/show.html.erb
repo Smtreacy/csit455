@@ -21,7 +21,7 @@
 </div>
 
 <div class="content-right">
-  <div class="profile-stats"
+  <div class="profile-stats">
     <!-- analytic information about classes? -->
     <div class="profile-header">
       <h1>Your Classes: </h1>
@@ -34,7 +34,11 @@
       </li>
       <li>
           <li>
-            <h3>Courses without books:</h3>
+            <h3>Courses without books:</h3><p><%=
+              ActiveRecord::Base.connection.execute("SELECT count(id) FROM courses WHERE id NOT IN
+              (SELECT course_id FROM books_for_classes WHERE 1=1)
+              AND teacher_id != #{@teacher.id}")[0][0]
+            %></p>
           </li>
       </li>
     </ul>

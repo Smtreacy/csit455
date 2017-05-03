@@ -2,9 +2,6 @@
 <div class="large-header">
   <h2>Welcome <%= @teacher.name %>!</h2>
   <p>Add courses for the next semester below, or use the button to the right to see your own courses!</p>
-
-
-
   <%= form_tag(search_path, :method => "get", id: "search-form") do %>
       <%= text_field_tag :search, params[:search], placeholder: "Search Courses" %>
       <%= submit_tag "Search", :name => nil %>
@@ -108,8 +105,7 @@
           <!-- button for editing class -->
           <!--  not done yet -->
           <a href="#" class="edit-class" onclick="classAjax(<%= course.id %>,'edit')">
-            <div id="add-book-btn" class="submit-course"
-                 onclick="clicked('<%=course.name%>', <%= @teacher.id %>, <%= course.id %>);">
+            <div id="add-book-btn" class="submit-course">
               <span class="icon check"><i class="fa fa-check"></i></span>
               <p class="btn-text">Edit Class</p>
             </div>
@@ -129,57 +125,44 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
+
   $(document).ready(function () {
       $('.ajax-cont').css({'opacity': '0', 'display':'none'});
-
-      $('.add-button').on("click", function (a) {
-          a.preventDefault();
-
-          $.ajax(
-              {
-                  url: '<%= new_teacher_course_url(@teacher) %>',
-                  cache: false,
-                  success: function (html) {
-                      $('.ajax-cont').append(html).css({"display": "block"})
-                          .animate({"opacity": "1"}, {duration: 350, queue: false});
-                  }
-              }
-          )
-      });
+      $('a.add-book, a.edit-book, a.del-book, a.edit-class').on("click", (a)=>{a.preventDefault();});
   });
 
   
 
-  $(document).ajaxComplete(function() {
-      $('p.exit').on("click", function () {
-          //hide the container to show login form
-          $('.ajax-cont').animate({"opacity": "0"}, {duration: 350, complete: function() {
-              $('.ajax-cont').css({"display": "none", "z-index": "-100"});
-          }});
-          //remove previous event listener on the ajax call, add a new one to just show the container
-          $('.add-button').off("click").on("click", function (a) {
-              a.preventDefault();  //prevent ajax call from happening again
-              $('.ajax-cont').css({"z-index": "100", "display": "block"});
-              $('.ajax-cont').animate({"opacity": "1"}, {duration: 350});
-          })
-      });
-  });
+//  $(document).ajaxComplete(function() {
+//      $('p.exit').on("click", function () {
+//          //hide the container to show login form
+//          $('.ajax-cont').animate({"opacity": "0"}, {duration: 350, complete: function() {
+//              $('.ajax-cont').css({"display": "none", "z-index": "-100"});
+//          }});
+//          //remove previous event listener on the ajax call, add a new one to just show the container
+//          $('.add-button').off("click").on("click", function (a) {
+//              a.preventDefault();  //prevent ajax call from happening again
+//              $('.ajax-cont').css({"z-index": "100", "display": "block"});
+//              $('.ajax-cont').animate({"opacity": "1"}, {duration: 350});
+//          })
+//      });
+//  });
 
   function classAjax(c_id, type) {
       if(type === 'edit') {
-          type = c_id+'/edit'
+          c_id = c_id+'/edit'
       }
       $.ajax({
           //url: '/teachers/<%= @teacher.id %>/courses/' + c_id + '/books/'+type,
           ///teachers/:teacher_id/courses/:id/edit
-          url: '/teachers/<%= @teacher.id %>/courses/' + c_id + type,
+          url: '/teachers/<%= @teacher.id %>/courses/'+c_id,
           cache: false,
           success: function (html) {
               //console.log("Success! T_id: " + t_id + "  C_id: "+c_id);
               $('.ajax-cont').html(html).css({"display": "block", "z-index": "100"})
                   .animate({"opacity": "1"}, {duration: 350, queue: false});
 
-              /* Add closing animation */
+            /* Add closing animation */
               $('p.exit').click(function() {
                   //hide the container to show login form
                   $('.ajax-cont').animate({"opacity": "0"}, {duration: 350, complete: () => {

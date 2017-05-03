@@ -50,7 +50,7 @@ class DashboardController < ApplicationController
   # else redirect to authenticate with error
   def login
     # find a user in the database with the same email as entered
-    @user = Teacher.find_by_email(params[:email])
+    @user = Teacher.find_by_email(params[:email].downcase)
 
     # if a user is found, and the password is correct, login
     if @user && @user.authenticate(params[:password])

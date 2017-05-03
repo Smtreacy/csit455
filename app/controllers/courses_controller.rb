@@ -82,7 +82,8 @@ class CoursesController < ApplicationController
   end
 
   def edit
-    @teacher = Teacher.find_by_email(session[:email])
+    @user = Teacher.find_by_email(session[:email])
+    @teachers = Teacher.where(department: @user.department)
     @course = Course.find(params[:id])
   end
 

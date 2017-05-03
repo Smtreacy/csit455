@@ -8,7 +8,10 @@ class TeachersController < ApplicationController
   def show
     @teacher = Teacher.find_by_email(session[:email])
     @courses = @teacher.courses.all
-    # @courses_without_books = Teacher.find_by_sql("SELECT ")
+    # @courses_without_books = Teacher.find_by_sql(
+    #     "SELECT count(id) FROM courses WHERE id NOT IN
+    #           (SELECT course_id FROM books_for_classes WHERE 1=1)
+    #           AND teacher_id != ?", @teacher.id)
   end
 
   def new
@@ -28,7 +31,7 @@ class TeachersController < ApplicationController
     # else redirect back
     if params[:su_password] == params[:confirmPass]
       @teacher = Teacher.new({department: params[:department].upcase, name: full_name,
-                              email: params[:email], password: params[:su_password],
+                              email: params[:email].downcase, password: params[:su_password],
                               password_confirmation: params[:confirmPass], admin: params[:admin] == 'true' ? true : false})
     else
       # ADD FLASH MESSAGE
@@ -57,6 +60,17 @@ class TeachersController < ApplicationController
   def edit
     @teacher = Teacher.find_by_email(session[:email])
     names = @teacher.name.split
+  end
+
+  def destroy
+    teacher = Teacher.find(params[:id])
+    if teacher.destroy
+      session.destroy
+      redirect_to '/'
+    else
+      flash[:fail] = "Unable to delete #{book.title}, try again"
+      redirect_back('/')
+    end
   end
 
   def update

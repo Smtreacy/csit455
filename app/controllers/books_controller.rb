@@ -16,7 +16,6 @@ class BooksController < ApplicationController
 
     @book.books_for_classes[0].quantity = params[:book][:books_for_classes][:quantity]
     # success message, will eventually remove
-    flash[:success] = "New book: #{@book.pretty_print_inspect}"
 
     # DEBUG
     # raise
@@ -24,6 +23,7 @@ class BooksController < ApplicationController
     # check if rails can save the book based on the given params
     # TODO: add validations to the book and meida models
     if @book.valid? && @book.save
+      flash[:success] = "Successfully added #{@book.title}!"
       redirect_back(fallback_location: '/index')
     else
       if @book.invalid?

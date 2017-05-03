@@ -23,7 +23,12 @@
   <% @course.each do |course| %>
       <div id="container" >
         <button class="dropdown" data-course-id="<%= course.id %>">
-          <%=course.name%>
+          <p class="course-num">
+            <% unless course.course_number.nil? %><%="#{course.deptName} #{course.course_number}"%><%end%>
+          </p>
+          <p class="course-name">
+            <%=course.name%>
+          </p>
           <% if course.submitted %>
               <i class="fa fa-check"></i> <!--This is the checkmark font. -->
               <p class="course-submitted">Course submitted!</p>
@@ -68,9 +73,6 @@
     <h3>Add Course</h3></a>
 </div>
 
-
-
-</div>
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function () {
         $('.ajax-cont').css({'opacity': '0', 'display':'none'});
@@ -90,8 +92,8 @@
             //remove previous event listener on the ajax call, add a new one to just show the container
             $('.add-button').off("click").on("click", function (a) {
                 a.preventDefault();  //prevent ajax call from happening again
-                $('.ajax-cont').css({"z-index": "100", "display": "block"});
-                $('.ajax-cont').animate({"opacity": "1"}, {duration: 350});
+                $('.ajax-cont').css({"z-index": "100", "display": "block"})
+                    .animate({"opacity": "1"}, {duration: 350});
             })
         });
     })

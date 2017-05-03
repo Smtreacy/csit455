@@ -1,0 +1,32 @@
+<div class="overlay">
+  <div class="course-form form-cont">
+    <h1 class="course-head form-head">Create a New Course</h1>
+    <p class="exit">X</p>
+    <!--/teachers/:teacher_id/courses/:id-->
+    <%= form_for(@course, url: "/teachers/#{@user.id}/courses/#{@course.id}", html: {method: :patch}) \
+          do |f| %>
+        <%= f.label :course_number, "Course Number: "%>
+        <%= f.text_field :course_number%>
+
+        <%= f.label :name, "Name: " %>
+        <%= f.text_field :name %>
+
+        <%= f.label :section, "Section: " %>
+        <%= f.number_field(:section, in: 1..10, step: 1) %>
+
+        <%= f.label :teacher_id, "Teacher: " %>
+        <%= f.select(:teacher_id) do %>
+            <% @teachers.where(department: @user.department).each do |teacher| %>
+                <%= content_tag(:option, teacher.name, value: teacher.id) %>
+            <% end %>
+        <% end %>
+
+        <%= f.hidden_field(:deptName, :value => \
+            @teachers.find_by(email: session[:email]).department ) %>
+
+        <%= f.hidden_field(:submitted, :value => false) %>
+
+        <%= f.submit "Create Course"%>
+    <% end %>
+  </div>
+</div>
