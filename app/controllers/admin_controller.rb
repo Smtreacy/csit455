@@ -15,9 +15,18 @@ class AdminController < ApplicationController
 
   def search
     query = "%" + params[:search] + "%"
-    @course = Course.where("name LIKE ?", query)
-    @teacher = Teacher.find_by_email(session[:email])
+    if (query == '%%')
+      redirect_to"/admin/index"
+    else
+      @teacher = Teacher.find_by_email(session[:email])
+      @course = Course.where("name LIKE ? AND deptName = '#{@teacher.department}'", query)
 
+    end
+    end
+
+
+  def return
+    redirect_to"/admin/index"
   end
 
   def add_course
