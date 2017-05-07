@@ -37,7 +37,13 @@
           </p>
           <% if course.submitted %>
               <i class="fa fa-check"></i> <!--This is the checkmark font. -->
-              <p class="course-submitted">Course submitted!</p>
+              <p class="course-submitted">
+                <% if course.finalized %>
+                    Course Finalized
+                <% else %>
+                    Course submitted!
+                <% end %>
+              </p>
           <% else %>
               <i class="fa fa-check hidden"></i>
               <p class="course-submitted hidden">Course submitted!</p>
@@ -55,6 +61,7 @@
                 <th class="title">ISBN:</th>
                 <th class="title">Edition:</th>
                 <th class="title">Quantity:</th>
+                <th class="title"></th>
               </tr>
             </thead>
             <tbody>
@@ -68,7 +75,7 @@
                   <th>
 
                     <% if book.media.exists? %>
-                        <a href="#" class="m-drop"><div class="m-down"></div></a>
+                        <!--<a href="#" class="m-drop"><div class="m-down"></div></a>-->
                     <% end %>
                   </th>
                 </tr>
@@ -99,20 +106,33 @@
           <!--  button for deleting class-->
           <a href="#" onclick="confirmDelete(<%= course.id %>)" class="add-book">
             <div id="add-book-btn">
-              <span class="icon plus"><i class="fa fa-plus"></i></span>
+              <span class="icon plus"><i class="fa fa-times"></i></span>
               <p class="btn-text">Delete Class</p>
             </div>
           </a>
 
           <!-- button for editing class -->
-          <!--  not done yet -->
           <a href="#" class="edit-class" onclick="classAjax(<%= course.id %>,'edit')">
             <div id="add-book-btn" class="submit-course">
-              <span class="icon check"><i class="fa fa-check"></i></span>
+              <span class="icon pencil"><i class="fa fa-pencil"></i></span>
               <p class="btn-text">Edit Class</p>
             </div>
           </a>
 
+          <% if course.submitted %>
+            <a href="#" class="finalize" onclick="classFinalizeAjax(<%= course.id %>)">
+              <div id="add-book-btn" class="finalize">
+                <span class="icon times"><i class="fa fa-star"></i></span>
+                <p class="btn-txt">
+                  <% if course.finalized %>
+                    Unfinalize
+                  <% else %>
+                    Finalized
+                  <% end %>
+                </p>
+              </div>
+            </a>
+          <% end %>
         </div>
       </div>
       <!--- to here for drop down menu. Keep the @Course.each -->
@@ -130,7 +150,7 @@
 
   $(document).ready(function () {
       $('.ajax-cont').css({'opacity': '0', 'display':'none'});
-      $('a.add-book, a.edit-book, a.del-book, a.edit-class, a.add-button').on("click", (a)=>{a.preventDefault();});
+      $('a.add-book, a.edit-book, a.del-book, a.edit-class, a.add-button, a.finalize').on("click", (a)=>{a.preventDefault();});
 
       $('.add-button').on("click", function (a) {
           a.preventDefault();
@@ -147,8 +167,6 @@
       });
   });
 
-  
-
   $(document).ajaxComplete(function() {
       $('p.exit').on("click", function () {
           //hide the container to show login form
@@ -163,6 +181,29 @@
           })
       });
   });
+
+  function classFinalizeAjax(c_id) {
+      console.log("/teacher/<%= @teacher.id %>/course/"+c_id);
+      $.ajax({
+          url: "/course/"+c_id,
+          cache: false,
+          success: function (html) {
+              console.log(html);
+              $('.ajax-cont').html(html).css({"display": "block", "z-index": "100"})
+                  .animate({"opacity": "1"}, {duration: 350, queue: false});
+
+            /* Add closing animation */
+              $('p.exit').click(function() {
+                  //hide the container to show login form
+                  $('.ajax-cont').animate({"opacity": "0"}, {
+                      duration: 350, complete: () => {
+                          $('.ajax-cont').css({"display": "none", "z-index": "-100"});
+                      }
+                  });
+              });
+          }
+      })
+  }
 
   function classAjax(c_id, type) {
       if(type === 'edit') {
@@ -193,11 +234,23 @@
       if(confirm("Are you sure you'd like to delete this book? This action cannot be undone."))
           $.ajax({
               method: 'DELETE',
-              url: '/admin/<%= @teacher.id %>/courses/'+c_id,
+              url: '/admin/<%= @teacher.id %>/course/'+c_id,
               cache: false,
               success: function(){location.reload(true)},
               fail: ()=>{alert("unable to delete this book, please try again.");}
           });
+  }
+
+
+  function finalize(c_id) {
+      $.ajax({
+          method: "GET",
+          url: 'course/'+c_id+'/finalize',
+          cache: false,
+          success: ()=>{
+            location.reload();
+          }
+      })
   }
 
   var acc = document.getElementsByClassName("dropdown");
@@ -217,6 +270,5 @@
           }
       }
   }
-
 
 </script>

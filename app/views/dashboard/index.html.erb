@@ -107,6 +107,7 @@
           <p class="btn-text">Add New Book</p>
         </div>
       </a>
+
       <!-- button for confirming + sending to admin -->
       <div id="add-book-btn" class="submit-course"
            onclick="clicked('<%=course.name%>', <%= @teacher.id %>, <%= course.id %>);">
@@ -148,6 +149,7 @@
                       console.log("Course submitted properly");
                       $('button[data-course-id="' + c_id + '"] i').toggleClass('hidden');
                       $('button[data-course-id="' + c_id + '"] p').toggleClass('hidden');
+                      location.reload();
                   }
               }
           )
@@ -157,14 +159,19 @@
   }
 
   function confirmDelete(c_id, b_id) {
-      if(confirm("Are you sure you'd like to delete this book? This action cannot be undone."))
+      if(confirm("Are you sure you'd like to delete this book? This action cannot be undone.")) {
           $.ajax({
               method: 'DELETE',
-              url: '/teachers/<%= @teacher.id %>/courses/'+c_id+'/books/'+b_id,
+              url: '/teachers/<%= @teacher.id %>/courses/' + c_id + '/books/' + b_id,
               cache: false,
-              success: function(){location.reload(true)},
-              fail: ()=>{alert("unable to delete this book, please try again.");}
+              success: () => {
+                  location.reload(true)
+              },
+              fail: () => {
+                  alert("unable to delete this book, please try again.");
+              }
           });
+      }
   }
 
   /* AJAX JQuery for adding books form */

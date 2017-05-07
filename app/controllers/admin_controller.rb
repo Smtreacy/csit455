@@ -7,6 +7,15 @@ class AdminController < ApplicationController
     # see and change ALL courses, books, etc..
     if @teacher.admin && session[:admin]
       @courses = Course.where(deptName: @teacher.department)
+      @courses.each {|course|
+        course.books.each {|b|
+          if b.books_for_classes[0].quantity == nil || b.books_for_classes[0].quantity == 0
+            b.quantity = 0
+          else
+            b.quantity = b.books_for_classes[0].quantity
+          end
+        }
+      }
     else
       flash[:fail] = "You do not have admin privliges!"
       redirect_to '/index'
@@ -20,7 +29,6 @@ class AdminController < ApplicationController
     else
       @teacher = Teacher.find_by_email(session[:email])
       @course = Course.where("name LIKE ? AND deptName = '#{@teacher.department}'", query)
-
     end
     end
 

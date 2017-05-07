@@ -37,7 +37,7 @@
             <h3>Courses without books:</h3><p><%=
               ActiveRecord::Base.connection.execute("SELECT count(id) FROM courses WHERE id NOT IN
               (SELECT course_id FROM books_for_classes WHERE 1=1)
-              AND teacher_id != #{@teacher.id}")[0][0]
+              AND teacher_id = #{@teacher.id}")[0][0]
             %></p>
           </li>
       </li>

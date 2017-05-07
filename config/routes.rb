@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   get '/admin/index' => 'admin#index'
   get '/admin/toggle' => 'admin#toggle'
   get '/index/sendEmail' => 'index#send_email'
+  get '/course/:id' => 'courses#view'
+  get '/admin/course/:id/finalize' => 'courses#finalize'
+  delete '/admin/:teacher_id/course/:id' => 'courses#destroy'
   #get '/search' => 'courses#search'
   get '/search' => 'admin#search'
   # custom post for form (avoid collision of :teacher_id)

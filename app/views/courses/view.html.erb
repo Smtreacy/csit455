@@ -1,0 +1,30 @@
+<div class="overlay">
+  <div class="course-form form-cont">
+    <h1 class="course-head form-head">Finalize Books for Course:</h1>
+    <p class="exit">X</p>
+
+    <% @course.books.each do |book| %>
+        <h2 class="book-title"><%= book.title %></h2>
+        <hr/>
+
+        <h3 class="book-info">Author: </h3>
+        <p class="book-info"><%= book.author %></p>
+
+        <h3 class="book-info">ISBN: </h3>
+        <p class="book-info"><%= book.isbn %></p>
+
+        <h3 class="book-info">Edition: </h3>
+        <p class="book-info"><%= book.edition %></p>
+
+        <h3 class="book-info">Quantity Required: </h3>
+        <p class="book-info"><%= book.quantity %></p>
+    <% end %>
+
+    <a href="#" class="fin-course">
+      <div id="add-book-btn"
+        onclick="finalize(<%= @course.id %>)">
+        <p class="btn-text">Finalize Books</p>
+      </div>
+    </a>
+  </div>
+</div>

@@ -2,6 +2,17 @@ class CoursesController < ApplicationController
   # default to no layout (easier AJAX calls)
   layout false
 
+  def view
+    @course = Course.find(params[:id])
+    @course.books.each {|b|
+      if b.books_for_classes[0].quantity == nil || b.books_for_classes[0].quantity == 0
+        b.quantity = 0
+      else
+        b.quantity = b.books_for_classes[0].quantity
+      end
+    }
+  end
+
   # form view for adding new courses
   def new
     @course = Course.new
@@ -72,7 +83,7 @@ class CoursesController < ApplicationController
   end
 
   def destroy
-    @course = Course.find(ids params[:id])
+    course = Course.find(params[:id])
     if course.destroy
       flash[:success] = "#{course.title},try again"
     else
@@ -96,12 +107,19 @@ class CoursesController < ApplicationController
     end
   end
 
-  private
+  def finalize
+    course = Course.find(params[:id])
 
+    if !course.finalized
+      course.update(finalized: true)
+    else
+      course.update(finalized: false)
+    end
+  end
+
+  private
   # helper function for validating parameters passed by course form
   def course_params
     params.require(:course).permit(:teacher_id, :course_number, :name, :deptName, :section, :submitted)
   end
-
-
 end
